@@ -7,5 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#FFE1DDDD</item>
+    </style>
 </resources>

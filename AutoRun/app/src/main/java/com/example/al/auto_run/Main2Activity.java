@@ -6,20 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Button bnt_12;
+public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
+    Button bnt_22;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        bnt_12=(Button)findViewById(R.id.button1);
+        setContentView(R.layout.activity_main2);
+        bnt_22=(Button)findViewById(R.id.button1);
         //实例化以上控件
-        bnt_12.setOnClickListener(this);
+        bnt_22.setOnClickListener(this);
         //设置以上按钮的点击事件
     }
     public void onClick(View v) {
 
-        Intent intent=new Intent(this,Main2Activity.class);
+        Intent intent=new Intent(this,MainActivity.class);
         startActivity(intent);
     }
 }
