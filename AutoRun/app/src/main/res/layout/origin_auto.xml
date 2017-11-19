@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/origin_background">
+
+    <!--  Walk -->
+    <TextView
+        android:id="@+id/txt_view_count_walk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/origin_auto_margin_top"
+
+        android:text="4.11"
+        android:textStyle="italic"
+        android:textSize="@dimen/miles_size_big"/>
+
+    <TextView
+        android:id="@+id/txt_view_walk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_count_walk"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/origin_auto_top_small"
+
+        android:text="@string/miles_cnt_walk"
+        android:textSize="@dimen/miles_size_small" />
+
+    <!--  Run  -->
+    <TextView
+        android:id="@+id/txt_view_count_run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_walk"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/origin_auto_margin_top"
+
+        android:text="4.11"
+        android:textStyle="italic"
+        android:textSize="@dimen/miles_size_big"/>
+
+    <TextView
+        android:id="@+id/txt_view_run"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_count_run"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/origin_auto_top_small"
+
+        android:text="@string/miles_cnt_run"
+        android:textSize="@dimen/miles_size_small" />
+
+    <!--  Ride   -->
+    <TextView
+        android:id="@+id/txt_view_count_ride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_run"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/origin_auto_margin_top"
+
+        android:text="4.11"
+        android:textStyle="italic"
+        android:textSize="@dimen/miles_size_big"/>
+
+    <TextView
+        android:id="@+id/txt_view_ride"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_count_ride"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/origin_auto_top_small"
+
+        android:text="@string/miles_cnt_run"
+        android:textSize="@dimen/miles_size_small" />
+</android.support.constraint.ConstraintLayout>

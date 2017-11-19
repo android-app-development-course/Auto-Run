@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/origin_background"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/txt_view_miles_count"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="@dimen/content_origin_margin"
+
+        android:text="4.11"
+        android:textStyle="italic"
+        android:textSize="@dimen/miles_size_big"/>
+
+    <TextView
+        android:id="@+id/txt_view_miles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_miles_count"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"
+
+        android:text="跑步总公里"
+        android:textSize="@dimen/miles_size_small" />
+
+    <at.markushi.ui.CircleButton
+        android:id="@+id/img_button_go"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginTop="@dimen/content_origin_margin"
+        app:cb_pressedRingWidth="15dp"
+        android:src="@mipmap/ic_button_go_round"
+        android:scaleType="fitXY"
+        app:cb_color="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txt_view_miles" />
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Auto_Run</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="miles_cnt_walk">健走总公里</string>
+    <string name="miles_cnt_run">跑步总公里</string>
+    <string name="miles_cnt_ride">骑行总公里</string>
+
+    <string name="toolbar_title">奔跑吧兄弟！</string>
+</resources>
