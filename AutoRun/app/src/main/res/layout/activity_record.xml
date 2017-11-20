@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    tools:context="com.example.al.auto_run.activity.RecordActivity"
+    xmlns:tc="http://schemas.android.com/apk/com.example.al.AutoRun">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout_record"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colortry1main2"
+        android:gravity="center_horizontal">
+        <TextView
+            android:id="@+id/tv_title"
+            android:textColor="#FFFFFF"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="跑步中"
+            android:textSize="20dp"/>
+
+
+        <ImageButton
+            android:id="@+id/btn_gps"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_gps"
+            />
+        <TextView
+            android:id="@+id/tv_num_kilometres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0.00"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:textSize="100dp"
+            android:layout_marginTop="35dp"
+            android:layout_below="@+id/tv_title"
+            android:layout_centerHorizontal="true" />
+        <TextView
+            android:id="@+id/tv_kilometres"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="距离（公里）"
+            android:textColor="#FFFFFF"
+            android:textSize="15dp"
+            android:layout_below="@+id/tv_num_kilometres"
+            android:layout_centerHorizontal="true" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout1"
+                android:layout_marginRight="110dp">
+                <Chronometer
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:format="%s"
+                    android:id="@+id/timer"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:layout_gravity="center"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="分：秒"
+                    android:textSize="15dp"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:id="@+id/textView2"
+                    android:layout_marginTop="18dp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/linearLayout2">
+                <TextView
+                    android:id="@+id/speeder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00'00''"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30dp"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="配速"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15dp"
+                    android:id="@+id/textView3"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="18dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="70dp"
+            android:layout_below="@+id/linearLayout"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/linearLayout_stopbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <ImageButton
+                    android:id="@+id/btn_stop"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:adjustViewBounds="false"
+                    android:background="@drawable/btn_stop"
+                    android:transitionName="shareName1"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_stop"
+                    android:layout_marginTop="5dp"
+                    android:text="暂停"
+                    android:textColor="#FFFFFF"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout_comeonbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:layout_marginRight="80dp"
+                android:visibility="gone"
+                >
+                <ImageButton
+                    android:id="@+id/btn_comeon"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="false"
+                    android:background="@drawable/btn_comeon"/>
+                <TextView
+                    android:id="@+id/tv_comeon"
+                    android:text="继续"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_overbutton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:visibility="gone"
+                >
+                <com.example.al.auto_run.customview.TasksCompletedView
+                    android:id="@+id/btn_over"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="false"
+                    tc:circleColor="@color/colorPrimary"
+                    tc:radius="100dp"
+                    tc:ringColor="@color/colorAccent"
+                    tc:strokeWidth="20dp"
+                    />
+                <TextView
+                    android:id="@+id/tv_over"
+                    android:text="长按结束"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/baidumap_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible">
+        <com.baidu.mapapi.map.TextureMapView
+            android:id="@+id/mTexturemap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </com.baidu.mapapi.map.TextureMapView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="#FFFFFF"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/littlt_kilometre"
+                android:layout_marginLeft="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textSize="60dp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="距离（公里）"
+                android:layout_marginLeft="5dp"
+                />
+
+            <Chronometer
+                android:id="@+id/little_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="10dp"
+                android:format="%s"
+                android:textSize="23dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_getlocal"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:alpha="0.7"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="70dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/btn_local"
+            />
+        <Button
+            android:id="@+id/btn_outoflocal"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:alpha="0.7"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="70dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/btn_outoflocal1"/>
+    </RelativeLayout>
+
+</RelativeLayout>

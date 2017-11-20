@@ -1,8 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:windowIsTranslucent">true</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -17,9 +18,14 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    //HCL
+
     <style name="MyEditText" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">#FFE1DDDD</item>
+        <item name="colorControlNormal">@color/colortryds</item>
+        <item name="colorControlActivated">@color/colortry1qd</item>
     </style>
-    //HCL
+
+    <style name="SpnStyle">
+        <item name="android:colorControlNormal" tools:targetApi="lollipop">#ffffff</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+    </style>
 </resources>

@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#ffe0e0e0</color>
     <color name="colorAccent">#03A9F4</color>
 
+    <color name="colortry1main2">#233142</color>
+    <color name="colortry1main">#455D7A</color>
+    <color name="colortry1qd">#F95959</color>
+    <color name="colortryds">#E3E3E3</color>
+
     <color name="colorPrimaryText">#212121</color>
     <color name="colorSecondaryText">#757575</color>
     <color name="colorBaseBackground">#fafafa</color>

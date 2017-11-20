@@ -9,13 +9,14 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:background="@color/colortry1main">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colortry1main"
             app:layout_scrollFlags=""
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
@@ -24,10 +25,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/tab_layout"
             app:tabMode="scrollable"
-            app:tabBackground="@color/colorPrimary"
-            app:tabIndicatorColor="@color/colorAccent"
-            app:tabSelectedTextColor="@color/colorAccent"
-            app:tabTextColor="@color/colorPrimaryDark"
+            app:tabBackground="@color/colortry1main"
+            app:tabIndicatorColor="@color/colortry1qd"
+            app:tabSelectedTextColor="@color/colortry1qd"
+            app:tabTextColor="@color/colortryds"
             app:tabGravity="fill">
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

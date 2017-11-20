@@ -46,7 +46,6 @@
             android:layout_marginRight="20dp"
             android:layout_weight="0.75"
             android:textCursorDrawable="@drawable/gray_bg"
-            android:inputType="textPassword"
             android:theme="@style/MyEditText"
             />
     </LinearLayout>
@@ -80,7 +79,6 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
             android:layout_weight="0.75"
-            android:inputType="textPassword"
             android:textCursorDrawable="@drawable/gray_bg"
             android:theme="@style/MyEditText"
             />
@@ -167,7 +165,7 @@
             android:background="@null"
             android:text="点此登录"
             android:gravity="center"
-            android:textColor="#FF29A047"
+            android:textColor="@color/colortry1qd"
             />
     </LinearLayout>
 </RelativeLayout>

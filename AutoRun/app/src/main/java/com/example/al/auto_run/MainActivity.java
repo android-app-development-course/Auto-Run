@@ -1,13 +1,9 @@
 package com.example.al.auto_run;
 
-import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
 import com.example.al.auto_run.activity.LoginActivity;
-import com.example.al.auto_run.utils.ActivityCollector;
 
 public class MainActivity extends BaseActivity {
     @Override

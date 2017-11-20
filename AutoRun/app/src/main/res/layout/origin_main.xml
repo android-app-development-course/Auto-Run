@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/origin_background"
+    android:background="@color/colortryds"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -30,18 +30,17 @@
         android:text="跑步总公里"
         android:textSize="@dimen/miles_size_small" />
 
-    <at.markushi.ui.CircleButton
+    <Button
         android:id="@+id/img_button_go"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
         android:layout_marginBottom="80dp"
         android:layout_marginTop="@dimen/content_origin_margin"
-        app:cb_pressedRingWidth="15dp"
-        android:src="@mipmap/ic_button_go_round"
+        android:background="@drawable/btn_go"
         android:scaleType="fitXY"
-        app:cb_color="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_view_miles" />
+        app:layout_constraintTop_toBottomOf="@id/txt_view_miles"
+        />
 </android.support.constraint.ConstraintLayout>
