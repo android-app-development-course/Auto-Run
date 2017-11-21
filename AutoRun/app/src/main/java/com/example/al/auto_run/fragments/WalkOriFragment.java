@@ -23,6 +23,7 @@ import at.markushi.ui.CircleButton;
 
 public class WalkOriFragment extends Fragment {
     TextView Tv_miles_count;
+    TextView tv_view_miles;
     Button Btn_go;
     @Nullable
     @Override
@@ -30,6 +31,8 @@ public class WalkOriFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.origin_main, container, false);
 
+        tv_view_miles=view.findViewById(R.id.txt_view_miles);
+        tv_view_miles.setText("健走总公里");
         Tv_miles_count=view.findViewById(R.id.txt_view_miles_count);
         Tv_miles_count.setOnClickListener(new View.OnClickListener() {
             @Override

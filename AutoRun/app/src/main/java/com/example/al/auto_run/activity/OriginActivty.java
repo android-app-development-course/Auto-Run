@@ -59,10 +59,10 @@ public class OriginActivty extends BaseActivity
         mNavigationView.setNavigationItemSelectedListener(this);
 
         List<Fragment> fragments = new ArrayList<Fragment>(){
-            {add(new AutoOriFragment()); add(new RideOriFragment());
-             add(new RunOriFragment()); add(new WalkOriFragment());}
+            {add(new AutoOriFragment()); add(new WalkOriFragment());
+             add(new RunOriFragment()); add(new RideOriFragment());}
         };
-        String[] titles = {"Auto", "Walk", "Run", "Ride"};
+        String[] titles = {"Auto", "健走", "跑步", "骑行"};
         mViewPage.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragments, titles));
         mTabLayout.setupWithViewPager(mViewPage);
     }

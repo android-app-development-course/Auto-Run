@@ -6,11 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_person_info"
-            android:icon="@drawable/ic_indicator"
+            android:icon="@drawable/ic_person_black_24dp"
             android:title="个人信息" />
         <item
             android:id="@+id/nav_history_record"
-            android:icon="@drawable/ic_indicator"
+            android:icon="@drawable/ic_history_black_24dp"
             android:title="历史信息" />
     </group>
 
@@ -18,15 +18,15 @@
         <menu>
             <item
                 android:id="@+id/nav_id_binding"
-                android:icon="@drawable/ic_indicator"
+                android:icon="@drawable/ic_account_box_black_24dp"
                 android:title="账号绑定" />
             <item
                 android:id="@+id/nav_detect_back"
-                android:icon="@drawable/ic_indicator"
-                android:title="后台监测" />
+                android:icon="@drawable/ic_devices_other_black_24dp"
+                android:title="设备检测" />
             <item
                 android:id="@+id/nav_about_us"
-                android:icon="@drawable/ic_indicator"
+                android:icon="@drawable/ic_all_inclusive_black_24dp"
                 android:title="关于我们"/>
         </menu>
     </item>

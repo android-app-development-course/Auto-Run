@@ -76,7 +76,7 @@ public class TasksCompletedView extends View {
         // typeArray.getColor(
         // R.styleable.TasksCompletedView_circleColor, 0xFFFFFFFF);
         mRingColor = typeArray.getColor(
-                R.styleable.TasksCompletedView_ringColor, getResources().getColor(R.color.colortry1qd));
+                R.styleable.TasksCompletedView_ringColor, 0xffffffff);
         nRingColor = 0xffff4100;
         mRingRadius = mRadius + mStrokeWidth / 2;
     }

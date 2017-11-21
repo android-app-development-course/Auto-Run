@@ -21,10 +21,12 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
+import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ZoomControls;
 
 import com.baidu.location.BDLocation;
@@ -37,6 +39,7 @@ import com.baidu.mapapi.map.BaiduMap;
 import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.Text;
 import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.example.al.auto_run.MainActivity;
@@ -48,6 +51,13 @@ import com.githang.statusbar.StatusBarCompat;
 import java.util.List;
 
 public class RecordActivity extends AppCompatActivity {
+    TextView tv_kilometre;
+    TextView tv_title;
+    TextView tv_num_kilometre;
+    TextView tv_timer;
+    TextView tv_num_speeder;
+    TextView tv_speeder;
+    Chronometer timer;
 
     ImageButton Btn_stop;
     ImageButton Btn_comeon;
@@ -126,6 +136,14 @@ public class RecordActivity extends AppCompatActivity {
         mLocationClient.start();
 
         //记录界面
+        tv_kilometre=(TextView)findViewById(R.id.tv_kilometres);
+        tv_num_kilometre=(TextView)findViewById(R.id.tv_num_kilometres);
+        tv_title=(TextView)findViewById(R.id.tv_title);
+        tv_num_speeder=(TextView)findViewById(R.id.tv_num_speeder);
+        tv_speeder=(TextView)findViewById(R.id.tv_speeder);
+        tv_timer=(TextView)findViewById(R.id.tv_timer);
+        timer=(Chronometer)findViewById(R.id.timer);
+
         record_relativeLayout=(RelativeLayout)findViewById(R.id.relativeLayout_record);
         Btn_stop=(ImageButton)findViewById(R.id.btn_stop);
         Btn_comeon=(ImageButton)findViewById(R.id.btn_comeon);
@@ -153,7 +171,14 @@ public class RecordActivity extends AppCompatActivity {
         Btn_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                float myalpha= (float) 0.5;
+                tv_kilometre.setAlpha(myalpha);
+                tv_num_kilometre.setAlpha(myalpha);
+                tv_num_speeder.setAlpha(myalpha);
+                tv_speeder.setAlpha(myalpha);
+                tv_timer.setAlpha(myalpha);
+                timer.setAlpha(myalpha);
+                tv_title.setText("跑步已暂停");
 
                 animation_stopbtn= AnimationUtils.loadAnimation(RecordActivity.this,R.anim.scale_stopbtn_besmall);
                 animation_stopbtn.setAnimationListener(new Animation.AnimationListener() {
@@ -183,30 +208,39 @@ public class RecordActivity extends AppCompatActivity {
         Btn_comeon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                mAnimationSet=initAnimationSet(R.anim.left_button_translate2,R.anim.right_button_translate2);
-                mAnimationSet.setInterpolator(new LinearInterpolator());
-                mAnimationSet.setAnimationListener(new Animation.AnimationListener() {
-                    @Override
-                    public void onAnimationStart(Animation animation) {
+                float myalpha= (float) 1;
+                tv_kilometre.setAlpha(myalpha);
+                tv_num_kilometre.setAlpha(myalpha);
+                tv_num_speeder.setAlpha(myalpha);
+                tv_speeder.setAlpha(myalpha);
+                tv_timer.setAlpha(myalpha);
+                timer.setAlpha(myalpha);
+                tv_title.setText("跑步中");
 
-                    }
+                //mAnimationSet=initAnimationSet(R.anim.left_button_translate2,R.anim.right_button_translate2);
+                //mAnimationSet.setInterpolator(new LinearInterpolator());
+                //mAnimationSet.setAnimationListener(new Animation.AnimationListener() {
+                  //  @Override
+                    //public void onAnimationStart(Animation animation) {
 
-                    @Override
-                    public void onAnimationEnd(Animation animation) {
+                    //}
+
+                    //@Override
+                    //public void onAnimationEnd(Animation animation) {
                         linearLayout_comeonbtn.setVisibility(View.GONE);
                         linearLayout_overbtn.setVisibility(View.GONE);
                         linearLayout_stopbtn.setVisibility(View.VISIBLE);
                         animation_stopbtn=AnimationUtils.loadAnimation(getApplication(),R.anim.scale_stopbtn_bebig);
                         animation_stopbtn.setAnimationListener(new myanimatinListener());
                         linearLayout_stopbtn.startAnimation(animation_stopbtn);
-                    }
+                    //}
 
-                    @Override
-                    public void onAnimationRepeat(Animation animation) {
+//                    @Override
+  //                  public void onAnimationRepeat(Animation animation) {
 
-                    }
-                });
-                view.startAnimation(mAnimationSet);
+//                    }
+  //              });
+
             }
         });
 
