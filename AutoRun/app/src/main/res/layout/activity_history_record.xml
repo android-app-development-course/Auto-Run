@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:scaleType="fitStart"
                 android:background="@color/colortry1main"
-                android:src="@drawable/reback" />
+                android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/CenterSpinner"

@@ -278,7 +278,7 @@ public class RecordActivity extends AppCompatActivity {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                Intent intent_over=new Intent(getApplication(),OriginActivty.class);
+                Intent intent_over=new Intent(RecordActivity.this,OriginActivty.class);
                 if(mCurrentProgress>=100)startActivity(intent_over);
                 if (mCurrentProgress < mTotalProgress) {
                     if (isClick) {// 一直长按

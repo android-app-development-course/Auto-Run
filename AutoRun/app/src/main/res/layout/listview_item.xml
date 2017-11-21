@@ -12,6 +12,7 @@
         android:layout_height="100dp"
         android:paddingLeft="12dp"
         android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:layout_weight="0.3"
         android:layout_gravity="center"/>
     <LinearLayout
@@ -62,7 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.25"
             android:orientation="horizontal"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:paddingBottom="12dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
