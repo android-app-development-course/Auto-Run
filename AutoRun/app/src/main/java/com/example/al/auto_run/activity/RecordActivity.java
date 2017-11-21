@@ -86,8 +86,8 @@ public class RecordActivity extends AppCompatActivity {
     public BDLocationListener myListener = new RecordActivity.MyLocationListener();
     private boolean isFirst=true;
     private boolean isRequest=false;
-    Button Btn_getlocal;
-    Button Btn_outoflocal;
+    ImageButton Btn_getlocal;
+    ImageButton Btn_outoflocal;
     RelativeLayout baidumap_layout;
 
     @Override
@@ -108,14 +108,14 @@ public class RecordActivity extends AppCompatActivity {
         mMapView.showScaleControl(false);
         mMapView.showZoomControls(false);
 
-        Btn_getlocal=(Button)findViewById(R.id.btn_getlocal);
+        Btn_getlocal=(ImageButton)findViewById(R.id.btn_getlocal);
         Btn_getlocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isRequest=true;
             }
         });
-        Btn_outoflocal=(Button)findViewById(R.id.btn_outoflocal);
+        Btn_outoflocal=(ImageButton)findViewById(R.id.btn_outoflocal);
         Btn_outoflocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
