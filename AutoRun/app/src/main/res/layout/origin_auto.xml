@@ -15,7 +15,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/origin_auto_margin_top"
 
-        android:text="4.11"
+        android:text="0"
         android:textStyle="italic"
         android:textSize="@dimen/miles_size_big"/>
 
@@ -28,7 +28,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/origin_auto_top_small"
 
-        android:text="@string/miles_cnt_walk"
+        android:text="@string/steps_cnt_walk"
         android:textSize="@dimen/miles_size_small" />
 
     <!--  Run  -->
@@ -41,7 +41,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/origin_auto_margin_top"
 
-        android:text="4.11"
+        android:text="0"
         android:textStyle="italic"
         android:textSize="@dimen/miles_size_big"/>
 
@@ -54,7 +54,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/origin_auto_top_small"
 
-        android:text="@string/miles_cnt_run"
+        android:text="@string/steps_cnt_run"
         android:textSize="@dimen/miles_size_small" />
 
     <!--  Ride   -->
@@ -67,7 +67,7 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/origin_auto_margin_top"
 
-        android:text="4.11"
+        android:text="0"
         android:textStyle="italic"
         android:textSize="@dimen/miles_size_big"/>
 
@@ -80,6 +80,6 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/origin_auto_top_small"
 
-        android:text="@string/miles_cnt_run"
+        android:text="@string/miles_cnt_ride"
         android:textSize="@dimen/miles_size_small" />
 </android.support.constraint.ConstraintLayout>

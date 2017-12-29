@@ -15,5 +15,6 @@ public class MainActivity extends BaseActivity {
         //else start login activity
         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 }

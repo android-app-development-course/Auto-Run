@@ -118,7 +118,7 @@ public class CountdownActivity extends AppCompatActivity {
                 Tv.setText("");
                 Intent intent=new Intent(CountdownActivity.this,RecordActivity.class);
                 startActivity(intent);
-
+                finish();
             }
 
             @Override

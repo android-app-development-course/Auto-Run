@@ -1,6 +1,13 @@
 package com.example.al.auto_run.activity;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -9,6 +16,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -16,10 +24,12 @@ import android.widget.Toast;
 import com.example.al.auto_run.BaseActivity;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.adapters.ViewPagerAdapter;
+import com.example.al.auto_run.custominterface.UpdateUiCallBack;
 import com.example.al.auto_run.fragments.AutoOriFragment;
 import com.example.al.auto_run.fragments.RideOriFragment;
 import com.example.al.auto_run.fragments.RunOriFragment;
 import com.example.al.auto_run.fragments.WalkOriFragment;
+import com.example.al.auto_run.service.StepService;
 import com.example.al.auto_run.utils.ActivityCollector;
 import com.githang.statusbar.StatusBarCompat;
 
@@ -31,7 +41,7 @@ import java.util.List;
  */
 
 public class OriginActivty extends BaseActivity
-                implements NavigationView.OnNavigationItemSelectedListener{
+                implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolBar;
     private NavigationView mNavigationView;
@@ -40,6 +50,20 @@ public class OriginActivty extends BaseActivity
     private ViewPager mViewPage;
 
     private long firstTime = 0;
+
+    private ViewPagerAdapter viewPagerAdapter;
+
+    private StepService mService;
+    private boolean mIsRunning;
+
+    private Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 1){
+                viewPagerAdapter.update(0);
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,8 +87,13 @@ public class OriginActivty extends BaseActivity
              add(new RunOriFragment()); add(new RideOriFragment());}
         };
         String[] titles = {"Auto", "健走", "跑步", "骑行"};
-        mViewPage.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), fragments, titles));
+        viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(), fragments, titles);
+
+        mViewPage.setAdapter(viewPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPage);
+
+        startStepService();
+
     }
 
 
@@ -149,5 +178,67 @@ public class OriginActivty extends BaseActivity
 
         mTabLayout = findViewById(R.id.tab_layout);
         mViewPage = findViewById(R.id.view_pager);
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+//        stopStepService();
+    }
+
+    protected void onPause() {
+        unbindStepService();
+        super.onPause();
+    }
+
+    protected void onResume() {
+        super.onResume();
+        if (this.mIsRunning){
+            bindStepService();
+        }
+    }
+
+
+
+    private UpdateUiCallBack mUiCallback = new UpdateUiCallBack() {
+        @Override
+        public void updateUi() {
+            Message message = mHandler.obtainMessage();
+            message.what = 1;
+            mHandler.sendMessage(message);
+        }
+    };
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            StepService.StepBinder binder = (StepService.StepBinder) service;
+            mService = binder.getService();
+            mService.registerCallback(mUiCallback);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+
+    private void bindStepService() {
+        bindService(new Intent(this, StepService.class), this.mConnection, Context.BIND_AUTO_CREATE);
+        //Log.i("bindService","successful");
+    }
+
+    private void unbindStepService() {
+        unbindService(this.mConnection);
+    }
+
+    private void startStepService() {
+        this.mIsRunning = true;
+        Log.d("mainactivity》》","启动服务"+startService(new Intent(this, StepService.class)));
+    }
+
+    private void stopStepService() {
+        this.mIsRunning = false;
+        if (this.mService != null)
+            stopService(new Intent(this, StepService.class));
     }
 }
