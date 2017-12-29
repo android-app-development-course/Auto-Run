@@ -17,13 +17,15 @@ import com.example.al.auto_run.utils.ActivityCollector;
 public class LoginActivity extends BaseActivity {
     private Button mToRegisterBtn;
     private Button mLoginBtn;
+    private Button mGetBackPasswordBtn;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        mToRegisterBtn = findViewById(R.id.button_register);
-        mLoginBtn = findViewById(R.id.button_login);
+        mToRegisterBtn = (Button)findViewById(R.id.button_register);
+        mLoginBtn = (Button)findViewById(R.id.button_login);
+        mGetBackPasswordBtn = (Button)findViewById(R.id.button_getBackPassword);
 
         mToRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +42,14 @@ public class LoginActivity extends BaseActivity {
                 Intent intent = new Intent(LoginActivity.this, OriginActivty.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        mGetBackPasswordBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, GetbackpasswordActivity.class);
+                startActivity(intent);
             }
         });
 

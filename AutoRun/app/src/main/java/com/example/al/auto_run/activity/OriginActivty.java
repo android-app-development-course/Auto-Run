@@ -138,6 +138,8 @@ public class OriginActivty extends BaseActivity
 
         if (id == R.id.nav_person_info) {
             // Handle the camera action
+            Intent intent=new Intent(OriginActivty.this,PersoninformationActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_history_record) {
 
         } else if (id == R.id.nav_id_binding) {
