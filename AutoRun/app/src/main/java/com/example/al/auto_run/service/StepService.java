@@ -16,6 +16,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.StepCount;
 import com.example.al.auto_run.StepDetector;
 import com.example.al.auto_run.custominterface.StepValuePassListener;
@@ -37,12 +38,6 @@ public class StepService extends Service {
     private StepCount mStepCount;
     private StepDetector mStepDetector;
     private PowerManager.WakeLock wakeLock;
-    private SharedPreferences mSharePreference_run;
-    private SharedPreferences mSharePreference_walk;
-    private SharedPreferences mSharePreference_ride;
-    private SharedPreferences.Editor mEdit_run;
-    private SharedPreferences.Editor mEdit_walk;
-    private SharedPreferences.Editor mEdit_ride;
 
     private final static int GRAY_SERVICE_ID = 1002;
 
@@ -50,16 +45,16 @@ public class StepService extends Service {
         @Override
         public void stepChanged(int steps,int state) {
             if(state==2){
-                mEdit_run.putString("steps_run", steps + "");
-                mEdit_run.commit();
+                int nowsteps=Integer.parseInt(PreferenceHelper.getSteps_run(getApplicationContext()));
+                PreferenceHelper.setSteps_run(getApplicationContext(),steps +nowsteps+ "");
             }
             else if(state==1){
-                mEdit_walk.putString("steps_walk",steps+"");
-                mEdit_walk.commit();
+                int nowsteps=Integer.parseInt(PreferenceHelper.getSteps_walk(getApplicationContext()));
+                PreferenceHelper.setSteps_walk(getApplicationContext(),steps +nowsteps+ "");
             }
             else if(state==3){
-                mEdit_ride.putString("steps_ride",steps+"");
-                mEdit_ride.commit();
+                int nowsteps=Integer.parseInt(PreferenceHelper.getSteps_ride(getApplicationContext()));
+                PreferenceHelper.setSteps_ride(getApplicationContext(),steps +nowsteps+ "");
             }
             //Log.i("service","ok");
             mCallback.updateUi();
@@ -80,15 +75,10 @@ public class StepService extends Service {
         this.mSensorManager = ((SensorManager)getSystemService(Context.SENSOR_SERVICE));
         this.mSensor = this.mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         this.mSensorManager.registerListener(this.mStepDetector, this.mSensor, SensorManager.SENSOR_DELAY_UI);
+
         this.mStepCount = new StepCount();
         this.mStepCount.initListener(this.mValuePassListener);
         this.mStepDetector.initListener(this.mStepCount);
-        this.mSharePreference_run = getSharedPreferences("relevant_data_run", Activity.MODE_PRIVATE);
-        this.mSharePreference_walk =getSharedPreferences("relevant_data_walk", Activity.MODE_PRIVATE);
-        this.mSharePreference_ride=getSharedPreferences("relevant_data_ride", Activity.MODE_PRIVATE);
-        this.mEdit_run = this.mSharePreference_run.edit();
-        this.mEdit_walk =this.mSharePreference_walk.edit();
-        this.mEdit_ride=this.mSharePreference_ride.edit();
 
     }
 
@@ -114,12 +104,9 @@ public class StepService extends Service {
         this.mSensorManager.unregisterListener(this.mStepDetector);
         Toast.makeText(this, "stop", Toast.LENGTH_SHORT).show();
         this.wakeLock.release();
-        mEdit_run.putString("steps_run", "0");
-        mEdit_walk.putString("steps_walk","0");
-        mEdit_ride.putString("steps_ride","0");
-        mEdit_run.commit();
-        mEdit_walk.commit();
-        mEdit_ride.commit();
+        PreferenceHelper.setSteps_walk(getApplicationContext(),"0");
+        PreferenceHelper.setSteps_run(getApplicationContext(),"0");
+        PreferenceHelper.setSteps_ride(getApplicationContext(),"0");
         super.onDestroy();
     }
 
@@ -129,12 +116,9 @@ public class StepService extends Service {
 
     //重置StepCount
     public void resetValues() {
-        mEdit_run.putString("steps_run","0");
-        mEdit_walk.putString("steps_walk","0");
-        mEdit_ride.putString("steps_ride","0");
-        mEdit_run.commit();
-        mEdit_walk.commit();
-        this.mStepCount.setSteps(0);
+        PreferenceHelper.setSteps_walk(getApplicationContext(),"0");
+        PreferenceHelper.setSteps_run(getApplicationContext(),"0");
+        PreferenceHelper.setSteps_ride(getApplicationContext(),"0");
     }
 
     public boolean onUnbind(Intent paramIntent) {

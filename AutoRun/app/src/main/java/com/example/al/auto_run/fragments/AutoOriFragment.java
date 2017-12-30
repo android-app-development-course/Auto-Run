@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
 
 /**
@@ -22,9 +23,6 @@ public class AutoOriFragment extends Fragment {
     public TextView tv_walk;
     public TextView tv_ride;
 
-    private SharedPreferences mySharedPreferences_run;
-    private SharedPreferences mySharedPreferences_walk;
-    private SharedPreferences mySharedPreferences_ride;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,9 +30,6 @@ public class AutoOriFragment extends Fragment {
         tv_ride=view.findViewById(R.id.txt_view_count_ride);
         tv_run=view.findViewById(R.id.txt_view_count_run);
         tv_walk=view.findViewById(R.id.txt_view_count_walk);
-        mySharedPreferences_run = this.getActivity().getSharedPreferences("relevant_data_run", Activity.MODE_PRIVATE);
-        mySharedPreferences_walk =this.getActivity().getSharedPreferences("relevant_data_walk",Activity.MODE_PRIVATE);
-        mySharedPreferences_ride=this.getActivity().getSharedPreferences("relevant_data_ride",Activity.MODE_PRIVATE);
 
         this.Change();
         return view;
@@ -42,8 +37,8 @@ public class AutoOriFragment extends Fragment {
 
     public void Change(){
         //Log.i("walk",mySharedPreferences_walk.getString("steps_walk","0"));
-        tv_run.setText(mySharedPreferences_run.getString("steps_run","0"));
-        tv_walk.setText(mySharedPreferences_walk.getString("steps_walk","0"));
-        tv_ride.setText(mySharedPreferences_ride.getString("steps_ride","0"));
+        tv_run.setText(PreferenceHelper.getSteps_run(getContext()));
+        tv_walk.setText(PreferenceHelper.getSteps_walk(getContext()));
+        tv_ride.setText(PreferenceHelper.getSteps_ride(getContext()));
     }
 }

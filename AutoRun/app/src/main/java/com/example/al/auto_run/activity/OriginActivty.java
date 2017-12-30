@@ -1,9 +1,11 @@
 package com.example.al.auto_run.activity;
 
+import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -22,7 +24,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.al.auto_run.BaseActivity;
+import com.example.al.auto_run.CalendarCount;
+import com.example.al.auto_run.DateUtils;
+import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
+import com.example.al.auto_run.StepAlertManagerUtils;
 import com.example.al.auto_run.adapters.ViewPagerAdapter;
 import com.example.al.auto_run.custominterface.UpdateUiCallBack;
 import com.example.al.auto_run.fragments.AutoOriFragment;
@@ -34,6 +40,7 @@ import com.example.al.auto_run.utils.ActivityCollector;
 import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -71,9 +78,11 @@ public class OriginActivty extends BaseActivity
         setContentView(R.layout.activity_origin);
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortry1main));
 
+        CalendarCount.initData(this);
+        Log.i("Today", PreferenceHelper.getDataofToday(this));
+        StepAlertManagerUtils.set0SeparateAlertManager(this);
+
         initView();
-
-
         setSupportActionBar(mToolBar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, mDrawerLayout, mToolBar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

@@ -12,9 +12,6 @@ import com.example.al.auto_run.custominterface.StepValuePassListener;
 * */
 public class StepCount implements StepCountListener {
 
-    private int mCount_walk = 0;
-    private int mCount_run =0;
-    private int mCount_ride=0;
     private int count=0;
     private StepValuePassListener mStepValuePassListener;
     private long timeOfLastPeak = 0;
@@ -35,15 +32,9 @@ public class StepCount implements StepCountListener {
                 this.count++;
             }else if(this.count == 9){
                 this.count++;
-                if(this.state==1)this.mCount_walk += this.count;
-                if(this.state==2)this.mCount_run +=this.count;
-                if(this.state==3)this.mCount_ride+=this.count;
-                notifyListener();
+                notifyListener(this.count);
             }else{
-                if(this.state==1) this.mCount_walk++;
-                if(this.state==2) this.mCount_run++;
-                if(this.state==3)this.mCount_ride++;
-                notifyListener();
+                notifyListener(1);
             }
         }
         else count=1;
@@ -53,19 +44,14 @@ public class StepCount implements StepCountListener {
         this.mStepValuePassListener = listener;
     }
 
-    public void notifyListener() {
+    public void notifyListener(int plussteps) {
         if (this.mStepValuePassListener != null) {
-            if(this.state==1)
-                this.mStepValuePassListener.stepChanged(this.mCount_walk, state);
-            if(this.state==2)
-                this.mStepValuePassListener.stepChanged(this.mCount_run,state);
-            if(this.state==3)
-                this.mStepValuePassListener.stepChanged(this.mCount_ride,state);
+            this.mStepValuePassListener.stepChanged(plussteps, state);
         }
     }
 
 
-    public void setSteps(int initValue) {
+    /*public void setSteps(int initValue) {
         this.mCount_walk = initValue;
         this.mCount_run =initValue;
         this.mCount_ride=initValue;
@@ -73,5 +59,5 @@ public class StepCount implements StepCountListener {
         timeOfLastPeak = 0;
         timeOfThisPeak = 0;
         notifyListener();
-    }
+    }*/
 }
