@@ -7,6 +7,7 @@ package com.example.al.auto_run.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -16,7 +17,6 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -31,43 +31,35 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ZoomControls;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.baidu.location.Poi;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
-import com.baidu.mapapi.map.BitmapDescriptor;
-import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
-import com.baidu.mapapi.map.MapStatusUpdate;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
-import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 
-import com.baidu.mapapi.map.OverlayOptions;
 import com.baidu.mapapi.map.Polyline;
 import com.baidu.mapapi.map.PolylineOptions;
-import com.baidu.mapapi.map.TextureMapView;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
+import com.example.al.auto_run.BaseActivity;
+import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.customanim.CircularAnim;
 import com.example.al.auto_run.customview.TasksCompletedView;
 import com.githang.statusbar.StatusBarCompat;
 
-import java.text.DecimalFormat;
-import java.text.Format;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecordActivity extends AppCompatActivity implements SensorEventListener {
+public class RecordActivity extends BaseActivity implements SensorEventListener {
     TextView tv_kilometre;
     TextView tv_title;
     TextView tv_num_kilometre;
@@ -131,6 +123,9 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
     private LatLng mll=null;
     public int mileage=0;
     long mRecordTime=0;
+    private String[] SportType={"健走","跑步","骑行"};
+    private int TypeNum;
+    private int Steps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,6 +134,11 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
         setContentView(R.layout.activity_record);
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortry1main2));
 
+        //新页面接收数据
+        Bundle bundle = this.getIntent().getExtras();
+        //接收name值
+        TypeNum =Integer.parseInt(bundle.getString("Type"));
+        Steps =getSteps();
         initMap();
         initLocation();
         startLocation();
@@ -192,6 +192,7 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
                     timer.start();
                     little_timer.start();
 
+                    onResume();
                     myalpha= (float) 1;
                     tv_kilometre.setAlpha(myalpha);
                     tv_num_kilometre.setAlpha(myalpha);
@@ -199,7 +200,7 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
                     tv_speeder.setAlpha(myalpha);
                     tv_timer.setAlpha(myalpha);
                     timer.setAlpha(myalpha);
-                    tv_title.setText("跑步中");
+                    tv_title.setText(SportType[TypeNum]+"中");
                     linearLayout_comeonbtn.setVisibility(View.GONE);
                     linearLayout_overbtn.setVisibility(View.GONE);
                     linearLayout_stopbtn.setVisibility(View.VISIBLE);
@@ -228,7 +229,7 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
                     timer.stop();
                     little_timer.stop();
                     mRecordTime = SystemClock.elapsedRealtime();
-
+                    onPause();
                     myalpha= (float) 0.5;
                     tv_kilometre.setAlpha(myalpha);
                     tv_num_kilometre.setAlpha(myalpha);
@@ -236,7 +237,7 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
                     tv_speeder.setAlpha(myalpha);
                     tv_timer.setAlpha(myalpha);
                     timer.setAlpha(myalpha);
-                    tv_title.setText("跑步已暂停");
+                    tv_title.setText(SportType[TypeNum]+"已暂停");
 
                     animation_stopbtn= AnimationUtils.loadAnimation(RecordActivity.this,R.anim.scale_stopbtn_besmall);
                     animation_stopbtn.setAnimationListener(new Animation.AnimationListener() {
@@ -278,6 +279,7 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
         tv_kilometre=(TextView)findViewById(R.id.tv_kilometres);
         tv_num_kilometre=(TextView)findViewById(R.id.tv_num_kilometres);
         tv_title=(TextView)findViewById(R.id.tv_title);
+        tv_title.setText(SportType[TypeNum]+"中");
         tv_num_speeder=(TextView)findViewById(R.id.tv_num_speeder);
         tv_speeder=(TextView)findViewById(R.id.tv_speeder);
         tv_timer=(TextView)findViewById(R.id.tv_timer);
@@ -322,7 +324,12 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
             @Override
             public void run() {
                 Intent intent_over=new Intent(RecordActivity.this,OriginActivty.class);
-                if(mCurrentProgress>=100)startActivity(intent_over);
+                if(mCurrentProgress>=100){
+                    Steps=getSteps()-Steps;
+                    onResume();
+                    startActivity(intent_over);
+                    finish();
+                }
                 if (mCurrentProgress < mTotalProgress) {
                     if (isClick) {// 一直长按
                         mCurrentProgress += 5;
@@ -366,6 +373,14 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
         public void onAnimationRepeat(Animation animation) {
 
         }
+    }
+
+    private int getSteps(){
+        switch (TypeNum){
+            case 0:return Integer.parseInt(PreferenceHelper.getSteps_walk(this));
+            case 1:return Integer.parseInt(PreferenceHelper.getSteps_run(this));
+        }
+        return -1;
     }
 
     //百度地图
@@ -506,11 +521,8 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
                 return;
             }
             mileage+=DistanceUtil.getDistance(last,ll);
-            if(mileage>10){
-                tv_num_kilometre.setText(String.format("%.2f",mileage/1000));
-                tv_little_num_kilometre.setText(String.format("%.2f",mileage/1000));
-            }
-
+            setDistant();
+            setAvgSpeed();
 
             points.add(ll);//如果要运动完成后画整个轨迹，位置点都在这个集合中
 
@@ -584,23 +596,56 @@ public class RecordActivity extends AppCompatActivity implements SensorEventList
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
+        mSensorManager.unregisterListener(this);
+        if (mLocationClient != null)
+        {
+            mLocationClient.stop();
+        }
+        mBaiduMap.setMyLocationEnabled(false);
         mMapView.onDestroy();
+        mMapView = null;
+        super.onDestroy();
     }
     @Override
     protected void onResume() {
-        super.onResume();
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
         mMapView.onResume();
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_UI);
+        super.onResume();
     }
     @Override
     protected void onPause() {
         mSensorManager.unregisterListener(this);
-        super.onPause();
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
+        super.onPause();
+    }
+
+    //获取平均速度
+    private void setAvgSpeed(){
+        String[] T=timer.getText().toString().split(":");
+        int Seconds=Integer.parseInt(T[0])*60+Integer.parseInt(T[1]);
+        if(Seconds!=0) {
+            tv_speeder.setText(String.format("%.2f", mileage / Seconds));
+        }
+    }
+    //获取公里数
+    private void setDistant(){
+        if(mileage>10){
+            tv_num_kilometre.setText(String.format("%.2f",mileage/1000));
+            tv_little_num_kilometre.setText(String.format("%.2f",mileage/1000));
+        }
+    }
+    //获取轨迹截图
+    private void getPictureofMap(){
+        if(mll!=null&&mlocation!=null) locateAndZoom(mlocation, mll);
+        mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
+            @Override
+            public void onSnapshotReady(Bitmap bitmap) {
+                //处理截图相关工作
+            }
+        });
     }
 }

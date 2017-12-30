@@ -99,7 +99,7 @@
                     android:id="@+id/tv_num_speeder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="00'00''"
+                    android:text="0.00"
                     android:textColor="#FFFFFF"
                     android:textSize="30dp"
                     android:layout_gravity="center"/>
@@ -107,7 +107,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="配速"
+                    android:text="均速(米/秒)"
                     android:textColor="#FFFFFF"
                     android:textSize="15dp"
                     android:id="@+id/tv_speeder"

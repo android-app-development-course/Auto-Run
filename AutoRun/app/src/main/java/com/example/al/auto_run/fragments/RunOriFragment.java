@@ -54,7 +54,13 @@ public class RunOriFragment extends Fragment {
                         .go(new CircularAnim.OnAnimationEndListener() {
                             @Override
                             public void onAnimationEnd() {
-                                startActivity(new Intent(getActivity(), CountdownActivity.class));
+                                Intent intent=new Intent(getActivity(),CountdownActivity.class);
+                                //用Bundle携带数据
+                                Bundle bundle=new Bundle();
+                                //传递name参数为tinyphp
+                                bundle.putString("Type", "1");
+                                intent.putExtras(bundle);
+                                startActivity(intent);
                             }
                         });
             }

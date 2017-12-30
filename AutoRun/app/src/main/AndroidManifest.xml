@@ -2,9 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.al.auto_run">
 
-<<<<<<< Updated upstream
-    <!-- 这个权限用于进行网络定位 -->
-=======
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -30,6 +27,9 @@
             android:name=".activity.OriginActivty"></activity>
         <activity android:name=".activity.LoginActivity"></activity>
         <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.GetbackpasswordActivity" />
+        <activity android:name=".activity.PersoninformationActivity" />
+        <activity android:name=".activity.EditpersoninformationActivity"></activity>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="DhFTshpMFbzPtIDEvnme7pvzUgW29GXG"/>
@@ -49,7 +49,6 @@
     </application>
 
     <!-- 这个权限用于进行网络定位-->
->>>>>>> Stashed changes
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <!-- 这个权限用于访问GPS定位 -->
@@ -93,49 +92,5 @@
 
     <!-- 允许应用程序更改主屏幕中的设置和快捷方式 -->
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-
-    <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".MainActivity"
-            android:launchMode="singleTask">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.RecordActivity" />
-        <activity android:name=".activity.CountdownActivity" />
-        <activity android:name=".activity.HistoryRecordActivity" />
-        <activity android:name=".activity.HistoryDetailed" />
-
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-
-        <activity
-            android:name=".activity.OriginActivty"
-            android:launchMode="singleTask" />
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.RegisterActivity" />
-
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="DhFTshpMFbzPtIDEvnme7pvzUgW29GXG" />
-
-        <service android:name=".service.StepService" />
-        <service android:name=".service.StepService$GrayInnerService" />
-
-        <activity android:name=".activity.GetbackpasswordActivity" />
-        <activity android:name=".activity.PersoninformationActivity" />
-        <activity android:name=".activity.EditpersoninformationActivity"></activity>
-    </application>
 
 </manifest>

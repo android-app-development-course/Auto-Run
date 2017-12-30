@@ -21,9 +21,10 @@ import com.githang.statusbar.StatusBarCompat;
 
 public class CountdownActivity extends AppCompatActivity {
 
-    TextView Tv;
-    Animation mAnimation;
-    RelativeLayout countdown_Layout;
+    private TextView Tv;
+    private Animation mAnimation;
+    private RelativeLayout countdown_Layout;
+    private Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,8 @@ public class CountdownActivity extends AppCompatActivity {
         setContentView(R.layout.activity_countdown);
         StatusBarCompat.setStatusBarColor(this, getResources().getColor(R.color.colortry1qd));
 
+        //新页面接收数据
+        bundle = this.getIntent().getExtras();
         countdown_Layout=(RelativeLayout)findViewById(R.id.countdown_layout);
         Tv =(TextView)findViewById(R.id.tv);
 
@@ -117,6 +120,7 @@ public class CountdownActivity extends AppCompatActivity {
             public void onAnimationEnd(Animation animation) {
                 Tv.setText("");
                 Intent intent=new Intent(CountdownActivity.this,RecordActivity.class);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 finish();
             }
