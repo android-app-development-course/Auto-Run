@@ -123,7 +123,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     double lastX;
     private BDLocation mlocation=null;
     private LatLng mll=null;
-    public int mileage=0;
+    public double mileage=0;
     long mRecordTime=0;
     private String[] SportType={"健走","跑步","骑行"};
     private int TypeNum;
@@ -532,7 +532,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
             LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
             Log.i("RecordActivity",ll.toString());
             //sdk回调gps位置的频率是1秒1个，位置点太近动态画在图上不是很明显，可以设置点之间距离大于为5米才添加到集合中
-            if (DistanceUtil.getDistance(last, ll) < 5&&DistanceUtil.getDistance(last,ll)>400) {
+            if (DistanceUtil.getDistance(last, ll) < 5||DistanceUtil.getDistance(last,ll)>400) {
                 return;
             }
             mileage+=DistanceUtil.getDistance(last,ll);

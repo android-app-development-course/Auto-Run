@@ -38,6 +38,7 @@ import com.example.al.auto_run.activity.RecordActivity;
 import com.example.al.auto_run.custominterface.StepValuePassListener;
 import com.example.al.auto_run.custominterface.UpdateUiCallBack;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class StepService extends Service {
     List<LatLng> points = new ArrayList<LatLng>();//位置点集合
     private long firstTime=0;
     private boolean isRide=false;
-    private float RideDistant=0;
+    private double RideDistant=0;
 
     private final static int GRAY_SERVICE_ID = 1002;
 
@@ -81,8 +82,8 @@ public class StepService extends Service {
                 PreferenceHelper.setSteps_walk(getApplicationContext(),steps +nowsteps+ "");
             }
             else if(state==3&&isRide){
-                float nowsteps=Float.parseFloat(PreferenceHelper.getSteps_ride(getApplicationContext()));
-                PreferenceHelper.setSteps_ride(getApplicationContext(),RideDistant +nowsteps+ "");
+                double nowsteps=Double.parseDouble(PreferenceHelper.getSteps_ride(getApplicationContext()));
+                PreferenceHelper.setSteps_ride(getApplicationContext(),formatdf(RideDistant +nowsteps)+ "");
             }
             //Log.i("StepService",String.valueOf(state));
             mCallback.updateUi();
@@ -170,21 +171,33 @@ public class StepService extends Service {
             //从第二个点开始
 
             LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-            Log.i("StepService",ll.toString());
+            //Log.i("StepService",ll.toString());
 
             //sdk回调gps位置的频率是1秒1个，位置点太近动态画在图上不是很明显，可以设置点之间距离大于为5米才添加到集合中
             double distance=DistanceUtil.getDistance(last, ll);
-            if (distance < 5&&distance>400) {
+
+            if (distance < 5||distance>400) {
+                //Log.i("StepService",String.valueOf(distance));
                 return;
             }
-            long gapTime=(System.currentTimeMillis()-firstTime)/1000;
-            long speed= (long) (distance/gapTime);
+            double gapTime=(System.currentTimeMillis()-firstTime)/1000;
+            firstTime=System.currentTimeMillis();
+            double speed= distance/gapTime;
+            Log.i("StepService",String.valueOf(speed));
             if(speed>5&&speed<9&& GpsCheck.isGpsOpen(getApplicationContext())){
                 isRide=true;
                 RideDistant+=distance;
+                RideDistant=formatdf(RideDistant);
             }else isRide=false;
             last = ll;
         }
+    }
+
+    //double保留两位小数
+    private double formatdf(double a){
+        DecimalFormat df   =new   java.text.DecimalFormat("#.00");
+        df.format(a);
+        return a;
     }
 
     private LatLng getMostAccuracyLocation(BDLocation location){
