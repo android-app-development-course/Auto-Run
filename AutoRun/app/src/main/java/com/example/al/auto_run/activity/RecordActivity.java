@@ -458,19 +458,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
             }
         });
 
-        // 定位初始化
-        mLocationClient = new LocationClient(this);
-        mLocationClient.registerLocationListener(myListener);
-        LocationClientOption option = new LocationClientOption();
-        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);//只用gps定位，需要在室外定位。
-        option.setOpenGps(true); // 打开gps
-        option.setCoorType("bd09ll"); // 设置坐标类型
-        option.setScanSpan(1000);
-        mLocationClient.setLocOption(option);
-        if (mLocationClient != null && !mLocationClient.isStarted()) {
-            mLocationClient.start();
-            mBaiduMap.clear();
-        }
+
     }
     private void startLocation() {
         int checkPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
@@ -481,6 +469,9 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
         return;
     }
     private void initLocation(){
+        // 定位初始化
+        mLocationClient = new LocationClient(this);
+        mLocationClient.registerLocationListener(myListener);
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy
         );//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
@@ -496,6 +487,10 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
         option.SetIgnoreCacheException(false);//可选，默认false，设置是否收集CRASH信息，默认收集
         option.setEnableSimulateGps(false);//可选，默认false，设置是否需要过滤GPS仿真结果，默认需要
         mLocationClient.setLocOption(option);
+        if (mLocationClient != null && !mLocationClient.isStarted()) {
+            mLocationClient.start();
+            mBaiduMap.clear();
+        }
     }
     private class MyLocationListener implements BDLocationListener {
 
@@ -532,10 +527,12 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
 
                 return;//画轨迹最少得2个点，首地定位到这里就可以返回了
             }
+
             //从第二个点开始
             LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+            Log.i("RecordActivity",ll.toString());
             //sdk回调gps位置的频率是1秒1个，位置点太近动态画在图上不是很明显，可以设置点之间距离大于为5米才添加到集合中
-            if (DistanceUtil.getDistance(last, ll) < 5&&DistanceUtil.getDistance(last,ll)>100) {
+            if (DistanceUtil.getDistance(last, ll) < 5&&DistanceUtil.getDistance(last,ll)>400) {
                 return;
             }
             mileage+=DistanceUtil.getDistance(last,ll);
