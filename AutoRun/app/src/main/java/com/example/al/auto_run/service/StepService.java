@@ -183,7 +183,7 @@ public class StepService extends Service {
             double gapTime=(System.currentTimeMillis()-firstTime)/1000;
             firstTime=System.currentTimeMillis();
             double speed= distance/gapTime;
-            Log.i("StepService",String.valueOf(speed));
+            //Log.i("StepService",String.valueOf(speed));
             if(speed>5&&speed<9&& GpsCheck.isGpsOpen(getApplicationContext())){
                 isRide=true;
                 RideDistant+=distance;

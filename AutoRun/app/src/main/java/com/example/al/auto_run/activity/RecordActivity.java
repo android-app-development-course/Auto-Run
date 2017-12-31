@@ -530,7 +530,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
 
             //从第二个点开始
             LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
-            Log.i("RecordActivity",ll.toString());
+
             //sdk回调gps位置的频率是1秒1个，位置点太近动态画在图上不是很明显，可以设置点之间距离大于为5米才添加到集合中
             if (DistanceUtil.getDistance(last, ll) < 5||DistanceUtil.getDistance(last,ll)>400) {
                 return;
@@ -540,7 +540,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
             setAvgSpeed();
 
             points.add(ll);//如果要运动完成后画整个轨迹，位置点都在这个集合中
-
+            Log.i("RecordActivity",ll.toString());
             last = ll;
 
             //显示当前定位点，缩放地图
@@ -643,7 +643,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
         String[] T=timer.getText().toString().split(":");
         int Seconds=Integer.parseInt(T[0])*60+Integer.parseInt(T[1]);
         if(Seconds!=0) {
-            tv_speeder.setText(String.format("%.2f", mileage / Seconds));
+            tv_num_speeder.setText(String.format("%.2f", mileage / Seconds));
         }
     }
     //获取公里数
