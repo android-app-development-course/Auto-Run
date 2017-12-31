@@ -1,6 +1,7 @@
 package com.example.al.auto_run.fragments;
 
 import android.app.ActivityOptions;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.al.auto_run.GpsCheck;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.activity.CountdownActivity;
 import com.example.al.auto_run.activity.HistoryRecordActivity;
@@ -49,6 +51,12 @@ public class RunOriFragment extends Fragment {
         Btn_go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!GpsCheck.isGpsOpen(getContext())){
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(""+"GPS未开启").setPositiveButton("确定", null).show();
+                    //Toast.makeText(getActivity(), "GPS未开启", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 CircularAnim.fullActivity(getActivity(),view)
                         .colorOrImageRes(R.color.colortry1qd)
                         .go(new CircularAnim.OnAnimationEndListener() {

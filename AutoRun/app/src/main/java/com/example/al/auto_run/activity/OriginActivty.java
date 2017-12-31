@@ -1,11 +1,9 @@
 package com.example.al.auto_run.activity;
 
-import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -25,7 +23,6 @@ import android.widget.Toast;
 
 import com.example.al.auto_run.BaseActivity;
 import com.example.al.auto_run.CalendarCount;
-import com.example.al.auto_run.DateUtils;
 import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.StepAlertManagerUtils;
@@ -40,7 +37,6 @@ import com.example.al.auto_run.utils.ActivityCollector;
 import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -170,7 +166,7 @@ public class OriginActivty extends BaseActivity
             } else {
                 long secondTime = System.currentTimeMillis();
                 if (secondTime - firstTime > 2000) {
-                    Toast.makeText(OriginActivty.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OriginActivty.this, "再按一次退出app", Toast.LENGTH_SHORT).show();
                     firstTime = secondTime;
                     return true;
                 } else {

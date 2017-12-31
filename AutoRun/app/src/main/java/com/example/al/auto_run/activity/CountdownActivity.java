@@ -11,20 +11,25 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.al.auto_run.BaseActivity;
 import com.example.al.auto_run.R;
+import com.example.al.auto_run.utils.ActivityCollector;
 import com.githang.statusbar.StatusBarCompat;
 
-public class CountdownActivity extends AppCompatActivity {
+public class CountdownActivity extends BaseActivity {
 
     private TextView Tv;
     private Animation mAnimation;
     private RelativeLayout countdown_Layout;
     private Bundle bundle;
+    private long firstTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,5 +137,20 @@ public class CountdownActivity extends AppCompatActivity {
         });
         Tv.setAnimation(mAnimation);
         mAnimation.start();
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                Toast.makeText(this, "再按一次退出倒计时", Toast.LENGTH_SHORT).show();
+                firstTime = secondTime;
+                return true;
+            } else {
+                finish();
+            }
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

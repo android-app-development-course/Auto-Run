@@ -46,6 +46,10 @@ public class CalendarCount {
         else {
             if(CalendarCount.isToday(Todaytime))return;
             else {
+                //将当日日期更新
+                Todaytime = DateUtils.dateFormat(calendar.getTimeInMillis(),"yyyy-MM-dd");
+                PreferenceHelper.setDataofToday(context,Todaytime);
+                //如果不是同一周就清除一周数据
                 if(CalendarCount.isDelectAll(Todaytime))initWeekData(context);//清除一周数据
                 //写入数据
                 String dayofweek=String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
