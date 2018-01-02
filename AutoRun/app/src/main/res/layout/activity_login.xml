@@ -40,7 +40,7 @@
             />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/edt_login_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -74,7 +74,7 @@
             />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/edt_login_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -154,22 +154,20 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="90dp"
             android:layout_weight="0.35"
-            android:text="忘记密码?"
             android:gravity="center"
-            android:textColor="#FFB2B0B0"
-            />
+            android:text="忘记密码?"
+            android:textColor="#FFB2B0B0" />
 
         <Button
             android:id="@+id/button_getBackPassword"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.65"
             android:layout_marginRight="90dp"
+            android:layout_weight="0.65"
             android:background="@null"
-            android:text="点此找回密码"
             android:gravity="center"
-            android:textColor="@color/colortry1qd"
-            />
+            android:text="点此找回密码"
+            android:textColor="@color/colortry1qd" />
     </LinearLayout>
 
 </RelativeLayout>

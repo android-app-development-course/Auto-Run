@@ -1,5 +1,6 @@
 package com.example.al.auto_run.adapters;
 
+import com.example.al.auto_run.Cloud.SimpleRecord;
 import com.example.al.auto_run.R;
 
 import java.util.ArrayList;
@@ -11,23 +12,28 @@ import java.util.List;
 
 public class HistoryData {
     private String date;
-    private String distance;
+    private float distance;
     private int imgId1;
     private int clockimageId;
     private String time;
+    private String Type;
+    private String AthleticsDetail;
+    private String Month;
+    private SimpleRecord RecordID;
+    private String PicPath;
 
-    public HistoryData(int imgId1, String date, String distance, String time) {
-        this.imgId1 = imgId1;
+
+
+    public HistoryData(String date,String Month, float distance, String time,String type,String AthleticsDetail) {
+        this.Month=Month;
         this.date=date;
         this.distance=distance;
         this.time=time;
+        this.Type=type;
+        this.AthleticsDetail=AthleticsDetail;
     }
 
-    public static List<HistoryData> getAllHistoryRecord(){
-        List<HistoryData> historyDataList =new ArrayList<HistoryData>();
-        historyDataList.add(new HistoryData(R.drawable.athimg, "17日上午 健走","15","30'"));
-        return historyDataList;
-    }
+
 
     public String getDate() {
         return date;
@@ -35,6 +41,14 @@ public class HistoryData {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getMonth() {
+        return Month;
+    }
+
+    public void setMonth(String Month) {
+        this.Month = Month;
     }
 
     public int getAthImageId() {
@@ -45,15 +59,31 @@ public class HistoryData {
         this.imgId1 = imgId1;
     }
 
-    public String getDistance() {
+    public float getDistance() {
         return distance;
     }
 
-    public void setDistance(String distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 
     public String getTime(){return time;}
 
     public void setTime(String time){this.time=time;}
+
+    public String getType(){return Type;}
+
+    public void setType(String Type){this.Type=Type;}
+
+    public String getAthleticsDetail(){return AthleticsDetail;}
+
+    public void setAthleticsDetail(String AthleticsDetail){this.AthleticsDetail=AthleticsDetail;}
+
+    public String getPicPath() {
+        return PicPath;
+    }
+
+    public void setPicPath(String PicPath) {
+        this.PicPath = PicPath;
+    }
 }

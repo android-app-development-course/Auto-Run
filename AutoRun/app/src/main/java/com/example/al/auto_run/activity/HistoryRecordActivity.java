@@ -4,6 +4,9 @@ package com.example.al.auto_run.activity;
  * Created by Al on 2017/11/19.
  */
 
+import android.annotation.SuppressLint;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
@@ -14,15 +17,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.al.auto_run.Cloud.MyUser;
+import com.example.al.auto_run.Cloud.SimpleRecord;
 import com.example.al.auto_run.adapters.FragAdapter;
 import com.example.al.auto_run.fragments.lvFragment;
 import com.example.al.auto_run.R;
 import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.FindListener;
 
 public class HistoryRecordActivity extends AppCompatActivity {
+
 
     TabLayout Tab;
     ViewPager viewPager;
@@ -30,6 +43,24 @@ public class HistoryRecordActivity extends AppCompatActivity {
     ArrayList<String> tabIndicators;
     ArrayList<Fragment> Fragments;
     ListView history_lv;
+
+
+    @SuppressLint("HandlerLeak")
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg){
+            switch (msg.what){
+                case 0:
+                    //从bundle中获取
+                    String LoadTab = msg.getData().getString("LoadTab");
+                    initViewPager(LoadTab);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+    };
 
 
     @Override
@@ -53,23 +84,73 @@ public class HistoryRecordActivity extends AppCompatActivity {
 
 
         initTab();
-        initViewPager();
+
     }
     private void initTab(){
         ViewCompat.setElevation(Tab,10);
         Tab.setupWithViewPager(viewPager);
-        tabIndicators=new ArrayList<>();
-        tabIndicators.add("11月");
-        tabIndicators.add("10月");
-        tabIndicators.add("9月");
+        /* ****************************************************************/
+
+
+        MyUser user= BmobUser.getCurrentUser(MyUser.class);
+
+        BmobQuery<SimpleRecord> query=new BmobQuery<SimpleRecord>();
+
+        query.addWhereEqualTo("username",user);
+
+        query.addQueryKeys("AthleticsMonth");
+
+        query.groupby(new String[]{"AthleticsMonth"});
+
+        query.findObjects(new FindListener<SimpleRecord>() {
+            @Override
+            public void done(List<SimpleRecord> list, BmobException e) {
+                if(e==null){
+
+
+                    Bundle month=new Bundle();
+                    Message msg = new Message();
+                    String LoadTab=list.get(0).getAthleticsMonth();
+                    String TempString=LoadTab;
+
+                    for (int i=1;i<list.size();i++)
+                    {
+                        if(!TempString.equals(list.get(i).getAthleticsMonth()))
+                        {
+                            LoadTab = LoadTab+","+list.get(i).getAthleticsMonth();
+                        }
+                        TempString=list.get(i).getAthleticsMonth();
+                    }
+
+                    msg.what=0;
+                    month.putString("LoadTab",LoadTab);
+                    msg.setData(month);
+                    mHandler.sendMessage(msg);
+
+                }else{
+                    Toast.makeText(getApplicationContext(),"未获取到数据,请确定是否有保存运动记录", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+        /* ****************************************************************/
     }
 
-    private void initViewPager(){
+    private void initViewPager(String LoadTab){
         Fragments=new ArrayList<>();
-        for(int i=1;i<=3;i++) {
+        tabIndicators=new ArrayList<>();
+
+        String tempTab[]=LoadTab.split(",");
+        for(int i=0;i<tempTab.length;i++)
+        {
+            tabIndicators.add(tempTab[i]);
+        }
+
+        for(int i=0;i<tabIndicators.size();i++) {
            /* temp = lvFragment.newInstance(10+i);*/
             lvFragment temp=new lvFragment();
-            temp.input(this);
+            temp.input(this,tabIndicators.get(i).trim());
             Fragments.add(temp);
         }
 

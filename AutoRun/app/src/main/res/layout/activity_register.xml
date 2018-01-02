@@ -40,7 +40,7 @@
             />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/edt_rgs_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -74,7 +74,7 @@
             />
 
         <EditText
-            android:id="@+id/editText1"
+            android:id="@+id/edt_rgs_email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -108,7 +108,7 @@
             />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/edt_rgs_password"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
@@ -121,7 +121,7 @@
 
     <Button
         android:layout_below="@id/linearLayout2"
-        android:id="@+id/button"
+        android:id="@+id/btn_rgs"
         android:layout_width="320dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
@@ -133,7 +133,7 @@
         />
 
     <LinearLayout
-        android:layout_below="@id/button"
+        android:layout_below="@id/btn_rgs"
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="50dp"

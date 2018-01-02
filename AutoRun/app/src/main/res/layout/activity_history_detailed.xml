@@ -60,6 +60,7 @@
                 android:weightSum="1">
 
                 <TextView
+                    android:id="@+id/history_detailed_distance"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -94,6 +95,7 @@
                         android:src="@drawable/ic_account_circle_black_24dp" />
 
                     <TextView
+                        android:id="@+id/history_detailed_dateAndType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -121,10 +123,10 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/history_detailed_stepCount"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
-                    android:text="15000"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -138,6 +140,7 @@
                     android:textSize="20sp" />
 
                 <TextView
+                    android:id="@+id/history_detailed_time"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.25"
