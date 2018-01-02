@@ -49,7 +49,7 @@ public class StepDetector implements SensorEventListener {
     //初始阈值
     float ThreadValue = (float) 2.0;
     //波峰波谷时间差
-    int TimeInterval = 250;
+    int[] TimeInterval ={0,250,250,450};
     private StepCountListener mStepListeners;
     //运动状态，0代表静止，1代表步行，2代表跑步，3代表骑行
     int stateofSport=0;
@@ -118,7 +118,7 @@ public class StepDetector implements SensorEventListener {
             if (detectorPeak(values, gravityOld)) {
                 timeOfLastPeak = timeOfThisPeak;
                 timeOfNow = System.currentTimeMillis();
-                if (timeOfNow - timeOfLastPeak >= TimeInterval
+                if (timeOfNow - timeOfLastPeak >= TimeInterval[stateofSport]
                         && (peakOfWave - valleyOfWave >= ThreadValue)) {
                     timeOfThisPeak = timeOfNow;
                     /*
@@ -130,7 +130,7 @@ public class StepDetector implements SensorEventListener {
                      * */
                     mStepListeners.countStep(stateofSport);
                 }
-                if (timeOfNow - timeOfLastPeak >= TimeInterval
+                if (timeOfNow - timeOfLastPeak >= TimeInterval[stateofSport]
                         && (peakOfWave - valleyOfWave >= InitialValue)) {
                     timeOfThisPeak = timeOfNow;
                     ThreadValue = peakValleyThread(peakOfWave - valleyOfWave);
