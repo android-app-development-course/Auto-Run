@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.al.auto_run.R;
@@ -19,8 +20,10 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UploadFileListener;
 
 import static cn.bmob.v3.Bmob.getApplicationContext;
+import static cn.bmob.v3.BmobRealTimeData.TAG;
 
 
 /**
@@ -36,22 +39,6 @@ public class saveCloudData {
         this.historyData=historyData;
     }
 
-    @SuppressLint("HandlerLeak")
-    Handler mHandler = new Handler(){
-        @Override
-        public void handleMessage(Message msg){
-            switch (msg.what){
-                case 0:
-                    //从bundle中获取记录
-                    String strRecordID = msg.getData().getString("strRecordID");
-                    saveDetailRecord(strRecordID);
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    };
     public void saveSimpleRecord()
     {
 
@@ -66,8 +53,6 @@ public class saveCloudData {
         simpleRecord.setAthleticsTime(historyData.getTime());
         simpleRecord.setAthleticsType(historyData.getType());
 
-
-
         simpleRecord.setusername(user);
 
 
@@ -76,12 +61,32 @@ public class saveCloudData {
             public void done(String s, BmobException e) {
                 if(e==null){
 
-                    Bundle record=new Bundle();
-                    Message msg = new Message();
-                    msg.what=0;
-                    record.putString("strRecordID",s);
-                    msg.setData(record);
-                    mHandler.sendMessage(msg);
+                    final DetailRecord detailRecord=new DetailRecord();
+                    detailRecord.setRecordID(s);
+
+                    detailRecord.setAthleticsType(historyData.getType());
+                    detailRecord.setAthleticsDetail(historyData.getAthleticsDetail());
+                    detailRecord.setAthleticsLength(historyData.getDistance());
+                    detailRecord.setAthleticsTime(historyData.getTime());
+                    detailRecord.addAll("trackViewX",historyData.gettrackViewX());
+                    detailRecord.addAll("trackViewY",historyData.gettrackViewY());
+
+                    detailRecord.save(new SaveListener<String>() {
+                        @Override
+                        public void done(String s, BmobException e) {
+                            if(e==null){
+
+                                Toast.makeText(getApplicationContext(),"保存成功！"+e.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                            }else{
+                                Log.d(TAG,  e.getMessage());
+
+                            }
+                        }
+                    });
+
+
+
                 }else{
                     Toast.makeText(getApplicationContext(),"保存失败："+e.getMessage(),
                             Toast.LENGTH_SHORT).show();
@@ -90,30 +95,5 @@ public class saveCloudData {
         });
 
     }
-    public void saveDetailRecord(String RecordID)
-    {
-        DetailRecord detailRecord=new DetailRecord();
 
-        detailRecord.setAthleticsType(historyData.getType());
-        detailRecord.setAthleticsDetail(historyData.getAthleticsDetail());
-        detailRecord.setAthleticsLength(historyData.getDistance());
-        detailRecord.setAthleticsTime(historyData.getTime());
-
-
-       /* BmobFile bmobFile=new BmobFile(new File("/storage/emulated/0/BaiduNetdisk/2016-03-05(2).png"));
-        detailRecord.setAthleticsPic(bmobFile);*/
-        detailRecord.setRecordID(RecordID);
-
-        detailRecord.save(new SaveListener<String>() {
-            @Override
-            public void done(String s, BmobException e) {
-                if(e==null){
-                    Toast.makeText(getApplicationContext(),"保存成功！"+e.getMessage(),
-                            Toast.LENGTH_SHORT).show();
-                }else{
-
-                }
-            }
-        });
-    }
 }

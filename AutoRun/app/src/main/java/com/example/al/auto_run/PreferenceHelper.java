@@ -2,6 +2,7 @@ package com.example.al.auto_run;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 /**
  * Created by Al on 2017/12/30.
@@ -15,10 +16,16 @@ public class PreferenceHelper {
     public static final String keyofToday="keyofToday";
 
     //记录一天的健走、跑步、骑行数据
-    public static final String Steps="OneDaySteps";
+    private static final String Steps="OneDaySteps";
     public static final String Steps_walk="steps_walk";
     public static final String Steps_run="steps_run";
     public static final String Steps_ride="steps_ride";
+
+    //记录所有健走、跑步、骑行的里程数
+    private static final String AllDistance="AllDistanceData";
+    public static final String Dis_walk="dis_walk";
+    public static final String Dis_run="dis_run";
+    public static final String Dis_ride="dis_ride";
 
     //记录一周的健走、跑步、骑行数据
     public static final String DataofWeek_Walk="dataofweek_walk";
@@ -74,5 +81,33 @@ public class PreferenceHelper {
     }
     public static String getDataofToday(Context context){
         return getDataofTodayPreference(context).getString(keyofToday,"0");
+    }
+
+    private static SharedPreferences getAllDistanceDataPreference(Context context){
+        return context.getSharedPreferences(AllDistance,Context.MODE_PRIVATE);
+    }
+    public static void addDis_walk(Context context,float value){
+        float a=getDis_ride(context)+value;
+        getAllDistanceDataPreference(context).edit().putFloat(Dis_walk,a).commit();
+    }
+    public static void addDis_run(Context context,float value){
+        float a=getDis_run(context)+value;
+        getAllDistanceDataPreference(context).edit().putFloat(Dis_run,a).commit();
+    }
+    public static void addDis_ride(Context context,float value){
+        float a=getDis_ride(context)+value;
+        getAllDistanceDataPreference(context).edit().putFloat(Dis_ride,a).commit();
+    }
+    public static float getDis_walk(Context context){
+        Log.i("Dis_walk",String.valueOf(getAllDistanceDataPreference(context).getFloat(Dis_walk,0)));
+        return getAllDistanceDataPreference(context).getFloat(Dis_walk,0);
+    }
+    public static float getDis_run(Context context){
+        Log.i("Dis_walk",String.valueOf(getAllDistanceDataPreference(context).getFloat(Dis_run,0)));
+        return getAllDistanceDataPreference(context).getFloat(Dis_run,0);
+    }
+    public static float getDis_ride(Context context){
+        Log.i("Dis_walk",String.valueOf(getAllDistanceDataPreference(context).getFloat(Dis_ride,0)));
+        return getAllDistanceDataPreference(context).getFloat(Dis_ride,0);
     }
 }

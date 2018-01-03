@@ -100,7 +100,7 @@ public class StepService extends Service {
         super.onCreate();
         SDKInitializer.initialize(getApplicationContext());
         initLocation();
-        startLocation();
+
         mLocationClient.start();
 
         this.wakeLock = ((PowerManager)getSystemService(Context.POWER_SERVICE)).newWakeLock(1, "StepService");
@@ -116,14 +116,6 @@ public class StepService extends Service {
 
     }
 
-    private void startLocation() {
-        int checkPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        if (checkPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((Activity) this.getApplicationContext(), new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-            Log.d("TTTT", "弹出提示");
-        }
-        return;
-    }
     private void initLocation(){
         // 定位初始化
         mLocationClient = new LocationClient(this);

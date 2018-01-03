@@ -1,5 +1,7 @@
 package com.example.al.auto_run.Cloud;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
 
@@ -11,7 +13,9 @@ public class DetailRecord extends BmobObject{
     private String RecordID;
     private String AthleticsDetail;
     private String AthleticsType;
-    private BmobFile AthleticsPic;
+    private String AthleticsPic;
+    private List<String> trackViewX;
+    private List<String> trackViewY;
     private float AthleticsLength;
     private String AthleticsTime;
 
@@ -32,11 +36,11 @@ public class DetailRecord extends BmobObject{
         this.AthleticsDetail = AthleticsDetail;
     }
 
-    public BmobFile getAthleticsPic() {
+    public String getAthleticsPic() {
         return this.AthleticsPic;
     }
 
-    public void setAthleticsPic(BmobFile AthleticsPic) {
+    public void setAthleticsPic(String AthleticsPic) {
         this.AthleticsPic = AthleticsPic;
     }
 
@@ -62,5 +66,21 @@ public class DetailRecord extends BmobObject{
 
     public void setAthleticsTime(String AthleticsTime) {
         this.AthleticsTime = AthleticsTime;
+    }
+
+    public List<String> gettrackViewX() {
+        return trackViewX;
+    }
+
+    public void settrackViewX(List<String> trackViewX) {
+        this.trackViewX = trackViewX;
+    }
+
+    public List<String> gettrackViewY() {
+        return trackViewY;
+    }
+
+    public void settrackViewY(List<String> trackViewY) {
+        this.trackViewY = trackViewY;
     }
 }

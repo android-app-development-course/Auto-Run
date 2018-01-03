@@ -13,7 +13,8 @@ import java.util.List;
 public class HistoryData {
     private String date;
     private float distance;
-    private int imgId1;
+    private List<String> trackViewX;
+    private List<String> trackViewY;
     private int clockimageId;
     private String time;
     private String Type;
@@ -24,13 +25,16 @@ public class HistoryData {
 
 
 
-    public HistoryData(String date,String Month, float distance, String time,String type,String AthleticsDetail) {
+    public HistoryData(String date,String Month, float distance, String time,String type,String AthleticsDetail,
+                       List<String> trackViewX,List<String> trackViewY) {
         this.Month=Month;
         this.date=date;
         this.distance=distance;
         this.time=time;
         this.Type=type;
         this.AthleticsDetail=AthleticsDetail;
+        this.trackViewX=trackViewX;
+        this.trackViewY=trackViewY;
     }
 
 
@@ -51,13 +55,36 @@ public class HistoryData {
         this.Month = Month;
     }
 
-    public int getAthImageId() {
-        return imgId1;
+    public List<String> gettrackViewX() {
+        return trackViewX;
     }
 
-    public void setAthImageId(int imgId1) {
-        this.imgId1 = imgId1;
+    public void settrackViewX(List<String> trackViewX) {
+        this.trackViewX = trackViewX;
     }
+
+    public List<String> gettrackViewY() {
+        return trackViewY;
+    }
+
+    public void settrackViewY(List<String> trackViewY) {
+        this.trackViewY = trackViewY;
+    }
+   /* public List<Double> gettrackViewX() {
+        return trackViewX;
+    }
+
+    public void settrackViewX(List<Double> trackViewX) {
+        this.trackViewX = trackViewX;
+    }
+
+    public List<Double> gettrackViewY() {
+        return trackViewY;
+    }
+
+    public void settrackViewY(List<Double> trackViewY) {
+        this.trackViewY = trackViewY;
+    }*/
 
     public float getDistance() {
         return distance;

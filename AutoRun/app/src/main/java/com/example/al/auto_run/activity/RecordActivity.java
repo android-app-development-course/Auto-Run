@@ -41,9 +41,12 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
 import com.baidu.mapapi.map.MapStatus;
 import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.MarkerOptions;
 import com.baidu.mapapi.map.MyLocationConfiguration;
 import com.baidu.mapapi.map.MyLocationData;
 
@@ -52,13 +55,17 @@ import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.al.auto_run.BaseActivity;
+import com.example.al.auto_run.Cloud.saveCloudData;
+import com.example.al.auto_run.DateUtils;
 import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
+import com.example.al.auto_run.adapters.HistoryData;
 import com.example.al.auto_run.customanim.CircularAnim;
 import com.example.al.auto_run.customview.TasksCompletedView;
 import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class RecordActivity extends BaseActivity implements SensorEventListener {
@@ -102,6 +109,8 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
 
     LatLng last = new LatLng(0, 0);//上一个定位点
     List<LatLng> points = new ArrayList<LatLng>();//位置点集合
+    private List<String> doubleLatitude=new ArrayList<String>();
+    private List<String> doubleLongitude=new ArrayList<String>();
     private int mCurrentDirection = 0;
     private double mCurrentLat = 0.0;
     private double mCurrentLon = 0.0;
@@ -109,12 +118,11 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     float mCurrentZoom = 18f;//默认地图缩放比例值
     MapStatus.Builder builder;
     Polyline mPolyline;//运动轨迹图层
+    private boolean isPause=false;
 
     //起点图标
-    // BitmapDescriptor startBD = BitmapDescriptorFactory.fromResource(R.drawable.ic_place_black_24dp);
-    //终点图标
-    //BitmapDescriptor finishBD = BitmapDescriptorFactory.fromResource(R.drawable.ic_place_black_24dp);
-
+    BitmapDescriptor startBD = BitmapDescriptorFactory
+            .fromResource(R.drawable.ic_me_history_startpoint);
     ImageButton Btn_getlocal;
     ImageButton Btn_outoflocal;
     RelativeLayout baidumap_layout;
@@ -129,6 +137,8 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     private int TypeNum;
     private int Steps;
     private long firstTime = 0;
+    private String month;
+    private String date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +152,11 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
         //接收name值
         TypeNum =Integer.parseInt(bundle.getString("Type"));
         Steps =getSteps();
+        Calendar c = Calendar.getInstance();
+        month = String.valueOf(c.get(Calendar.MONTH) + 1);
+        c.setTimeInMillis(System.currentTimeMillis());
+        date = DateUtils.dateFormat(c.getTimeInMillis(),"yyyy-MM-dd");
+
         initMap();
         initLocation();
         startLocation();
@@ -327,8 +342,16 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
             @Override
             public void run() {
                 Intent intent_over=new Intent(RecordActivity.this,OriginActivty.class);
+                intent_over.putExtra("TypeNum", TypeNum);
                 if(mCurrentProgress>=100){
                     Steps=getSteps()-Steps;
+                    float dis=Float.parseFloat(String.format("%.2f",mileage/1000));
+                    saveData(date,month,dis,timer.getText().toString(),String.valueOf(Steps));
+                    switch (TypeNum){
+                        case 0:PreferenceHelper.addDis_walk(getApplicationContext(),dis);break;
+                        case 1:PreferenceHelper.addDis_run(getApplicationContext(),dis);break;
+                        case 2:PreferenceHelper.addDis_ride(getApplicationContext(),dis);break;
+                    }
                     onResume();
                     startActivity(intent_over);
                     finish();
@@ -512,6 +535,8 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
                 isFirst = false;
 
                 points.add(ll);//加入集合
+                doubleLatitude.add(String.valueOf(location.getLatitude()));
+                doubleLongitude.add(String.valueOf(location.getLongitude()));
                 last = ll;
 
                 //显示当前定位点，缩放地图
@@ -520,10 +545,10 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
                 mlocation=location;
 
                 //标记起点图层位置
-                //MarkerOptions oStart = new MarkerOptions();// 地图标记覆盖物参数配置类
-                //oStart.position(points.get(0));// 覆盖物位置点，第一个点为起点
-                //oStart.icon(null);// 设置覆盖物图片
-                //mBaiduMap.addOverlay(oStart); // 在地图上添加此图层
+                MarkerOptions oStart = new MarkerOptions();// 地图标记覆盖物参数配置类
+                oStart.position(points.get(0));// 覆盖物位置点，第一个点为起点
+                oStart.icon(startBD);// 设置覆盖物图片
+                mBaiduMap.addOverlay(oStart); // 在地图上添加此图层
 
                 return;//画轨迹最少得2个点，首地定位到这里就可以返回了
             }
@@ -535,12 +560,17 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
             if (DistanceUtil.getDistance(last, ll) < 5||DistanceUtil.getDistance(last,ll)>400) {
                 return;
             }
-            mileage+=DistanceUtil.getDistance(last,ll);
-            setDistant();
-            setAvgSpeed();
+            if(!isPause){
+                mileage += DistanceUtil.getDistance(last, ll);
+                //Log.i("mileage",String.valueOf(mileage));
+                setDistant();
+                setAvgSpeed();
+            }
 
             points.add(ll);//如果要运动完成后画整个轨迹，位置点都在这个集合中
-            Log.i("RecordActivity",ll.toString());
+            doubleLatitude.add(String.valueOf(location.getLatitude()));
+            doubleLongitude.add(String.valueOf(location.getLongitude()));
+            //Log.i("RecordActivity",ll.toString());
             last = ll;
 
             //显示当前定位点，缩放地图
@@ -552,10 +582,10 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
             mMapView.getMap().clear();
 
             //起始点图层也会被清除，重新绘画
-           // MarkerOptions oStart = new MarkerOptions();
-            //oStart.position(points.get(0));
-            //oStart.icon(null);
-            //mBaiduMap.addOverlay(oStart);
+            MarkerOptions oStart = new MarkerOptions();
+            oStart.position(points.get(0));
+            oStart.icon(startBD);
+            mBaiduMap.addOverlay(oStart);
 
             //将points集合中的点绘制轨迹线条图层，显示在地图上
             PolylineOptions ooPolyline = new PolylineOptions().width(10)
@@ -625,6 +655,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     @Override
     protected void onResume() {
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
+        isPause=false;
         mMapView.onResume();
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_UI);
@@ -632,6 +663,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     }
     @Override
     protected void onPause() {
+        isPause=true;
         mSensorManager.unregisterListener(this);
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();
@@ -648,13 +680,13 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     }
     //获取公里数
     private void setDistant(){
-        if(mileage>10){
+        if(mileage>=10){
             tv_num_kilometre.setText(String.format("%.2f",mileage/1000));
             tv_little_num_kilometre.setText(String.format("%.2f",mileage/1000));
         }
     }
     //获取轨迹截图
-    private void getPictureofMap(){
+   /* private void getPictureofMap(){
         if(mll!=null&&mlocation!=null) locateAndZoom(mlocation, mll);
         mBaiduMap.snapshot(new BaiduMap.SnapshotReadyCallback() {
             @Override
@@ -662,5 +694,14 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
                 //处理截图相关工作
             }
         });
+    }*/
+    //上传数据
+    public void saveData(String data,String month,float distance,String time,String AthleticsDetail)
+    {
+        HistoryData historyData=new HistoryData(data,month,distance,
+                time,SportType[TypeNum],AthleticsDetail,doubleLatitude,doubleLongitude);
+        saveCloudData save=new saveCloudData();
+        save.getHistoryData(historyData);
+        save.saveSimpleRecord();
     }
 }

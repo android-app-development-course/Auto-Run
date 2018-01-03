@@ -7,6 +7,13 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     tools:context="com.example.al.auto_run.activity.HistoryDetailed">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/Staticmap"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </com.baidu.mapapi.map.MapView>
+
     <ImageButton
             android:id="@+id/history_detailed_reback"
             android:layout_width="wrap_content"
@@ -28,7 +35,6 @@
         android:background="@drawable/circle_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
         <LinearLayout
         android:layout_width="match_parent"

@@ -1,16 +1,20 @@
 package com.example.al.auto_run.activity;
 
+import android.Manifest;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -103,23 +107,10 @@ public class OriginActivty extends BaseActivity
         mViewPage.setAdapter(viewPagerAdapter);
         mTabLayout.setupWithViewPager(mViewPage);
 
+        startLocation();
+
         startStepService();
-
-        /*saveData();*/
-
     }
-
-    public void saveData()
-    {
-        HistoryData historyData=new HistoryData("2018-01-01","1",(float)5.5,
-                "20min","跑步","15000");
-        saveCloudData save=new saveCloudData();
-        save.getHistoryData(historyData);
-        save.saveSimpleRecord();
-
-    }
-
-
 
     @Override
     public void onBackPressed() {
@@ -129,6 +120,15 @@ public class OriginActivty extends BaseActivity
 
              super.onBackPressed();
         }
+    }
+
+    private void startLocation() {
+        int checkPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        if (checkPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+            Log.d("TTTT", "弹出提示");
+        }
+        return;
     }
 
 //    @Override
@@ -176,6 +176,17 @@ public class OriginActivty extends BaseActivity
         return true;
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.e("tag", "onNewINtent执行了");
+        setIntent(intent);
+        int TypeNum = intent.getIntExtra("TypeNum",-1);
+        if(TypeNum!=-1){
+            Log.i("TypeNum",String.valueOf(TypeNum));
+            viewPagerAdapter.update(TypeNum+1);
+        }
+    }
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {

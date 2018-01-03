@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.al.auto_run.GpsCheck;
+import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.activity.CountdownActivity;
 import com.example.al.auto_run.activity.HistoryRecordActivity;
@@ -36,6 +37,7 @@ public class WalkOriFragment extends Fragment {
         tv_view_miles=view.findViewById(R.id.txt_view_miles);
         tv_view_miles.setText("健走总公里");
         Tv_miles_count=view.findViewById(R.id.txt_view_miles_count);
+        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_walk(getContext())));
         Tv_miles_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,4 +75,7 @@ public class WalkOriFragment extends Fragment {
         return view;
     }
 
+    public void Change(){
+        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_walk(getContext())));
+    }
 }

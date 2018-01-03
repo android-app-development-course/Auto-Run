@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.example.al.auto_run.fragments.AutoOriFragment;
+import com.example.al.auto_run.fragments.RideOriFragment;
+import com.example.al.auto_run.fragments.RunOriFragment;
+import com.example.al.auto_run.fragments.WalkOriFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,11 +68,13 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
                     ((AutoOriFragment) fragment).Change();
                     break;
                 case 1:
+                    ((WalkOriFragment)fragment).Change();
                     break;
                 case 2:
-
+                    ((RunOriFragment)fragment).Change();
                     break;
-                default:
+                case 3:
+                    ((RideOriFragment)fragment).Change();
                     break;
             }
         }

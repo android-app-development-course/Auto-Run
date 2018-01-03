@@ -3,6 +3,7 @@ package com.example.al.auto_run.fragments;
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.al.auto_run.GpsCheck;
+import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.activity.CountdownActivity;
 import com.example.al.auto_run.activity.HistoryRecordActivity;
@@ -40,6 +42,7 @@ public class RunOriFragment extends Fragment {
         tv_view_miles=view.findViewById(R.id.txt_view_miles);
         tv_view_miles.setText("跑步总公里");
         Tv_miles_count=view.findViewById(R.id.txt_view_miles_count);
+        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_run(getContext())));
         Tv_miles_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,5 +77,8 @@ public class RunOriFragment extends Fragment {
             }
         });
         return view;
+    }
+    public void Change(){
+        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_run(getContext())));
     }
 }
