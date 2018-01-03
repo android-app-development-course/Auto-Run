@@ -209,7 +209,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
                     }
                     timer.start();
                     little_timer.start();
-
+                    isPause=false;
                     onResume();
                     myalpha= (float) 1;
                     tv_kilometre.setAlpha(myalpha);
@@ -247,6 +247,7 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
                     timer.stop();
                     little_timer.stop();
                     mRecordTime = SystemClock.elapsedRealtime();
+                    isPause=true;
                     onPause();
                     myalpha= (float) 0.5;
                     tv_kilometre.setAlpha(myalpha);
@@ -655,7 +656,6 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     @Override
     protected void onResume() {
         //在activity执行onResume时执行mMapView. onResume ()，实现地图生命周期管理
-        isPause=false;
         mMapView.onResume();
         mSensorManager.registerListener(this, mSensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION),
                 SensorManager.SENSOR_DELAY_UI);
@@ -663,7 +663,6 @@ public class RecordActivity extends BaseActivity implements SensorEventListener 
     }
     @Override
     protected void onPause() {
-        isPause=true;
         mSensorManager.unregisterListener(this);
         //在activity执行onPause时执行mMapView. onPause ()，实现地图生命周期管理
         mMapView.onPause();

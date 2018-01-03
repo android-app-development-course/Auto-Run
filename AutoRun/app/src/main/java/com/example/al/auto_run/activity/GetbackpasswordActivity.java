@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.example.al.auto_run.R;
 
 import cn.bmob.v3.BmobUser;
@@ -16,6 +17,7 @@ import cn.bmob.v3.listener.UpdateListener;
 
 public class GetbackpasswordActivity extends AppCompatActivity {
     private Button mToReturnLoginBtn;
+    private Button mGetbackPassword;
     private EditText email;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +25,15 @@ public class GetbackpasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_getbackpassword);
 
         mToReturnLoginBtn=(Button)findViewById(R.id.button_to_login1);
+        mGetbackPassword=(Button)findViewById(R.id.button_to_getBackPassword);
         email=(EditText)findViewById(R.id.email);
 
+        mGetbackPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(GetbackpasswordActivity.this, "找回密码申请已接收，请注意邮箱信息！", Toast.LENGTH_SHORT).show();
+            }
+        });
         mToReturnLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

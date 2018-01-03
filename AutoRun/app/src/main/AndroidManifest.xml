@@ -29,7 +29,8 @@
         <activity android:name=".activity.RegisterActivity"></activity>
         <activity android:name=".activity.GetbackpasswordActivity" />
         <activity android:name=".activity.PersoninformationActivity" />
-        <activity android:name=".activity.EditpersoninformationActivity"></activity>
+        <activity android:name=".activity.EditpersoninformationActivity" />
+        <activity android:name=".activity.StatisticalActivity"/>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="DhFTshpMFbzPtIDEvnme7pvzUgW29GXG"/>

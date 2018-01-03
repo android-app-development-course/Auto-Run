@@ -1,11 +1,8 @@
 package com.example.al.auto_run.fragments;
 
-import android.app.Activity;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
+import com.example.al.auto_run.activity.HistoryRecordActivity;
 
 /**
  * Created by windy on 2017/11/11.
@@ -31,7 +29,8 @@ public class AutoOriFragment extends Fragment {
         tv_run=view.findViewById(R.id.txt_view_count_run);
         tv_walk=view.findViewById(R.id.txt_view_count_walk);
 
-        this.Change();
+        Change();
+        setOnClick();
         return view;
     }
 
@@ -40,5 +39,28 @@ public class AutoOriFragment extends Fragment {
         tv_run.setText(PreferenceHelper.getSteps_run(getContext()));
         tv_walk.setText(PreferenceHelper.getSteps_walk(getContext()));
         tv_ride.setText(PreferenceHelper.getSteps_ride(getContext()));
+    }
+
+    private void setOnClick(){
+        tv_walk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HistoryRecordActivity.actionStart(getContext());
+            }
+        });
+
+        tv_run.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HistoryRecordActivity.actionStart(getContext());
+            }
+        });
+
+        tv_ride.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HistoryRecordActivity.actionStart(getContext());
+            }
+        });
     }
 }

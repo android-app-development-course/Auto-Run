@@ -5,6 +5,8 @@ package com.example.al.auto_run.activity;
  */
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
@@ -15,13 +17,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.al.auto_run.Cloud.MyUser;
 import com.example.al.auto_run.Cloud.SimpleRecord;
 import com.example.al.auto_run.adapters.FragAdapter;
+import com.example.al.auto_run.customview.HistogramCharView;
 import com.example.al.auto_run.fragments.lvFragment;
 import com.example.al.auto_run.R;
 import com.githang.statusbar.StatusBarCompat;
@@ -44,6 +50,10 @@ public class HistoryRecordActivity extends AppCompatActivity {
     ArrayList<Fragment> Fragments;
     ListView history_lv;
 
+    private TextView mStatiscTxtView;
+    private Spinner mSpinner;
+
+    private String mSpinnerSelectedValue = "跑步统计";
 
     @SuppressLint("HandlerLeak")
     Handler mHandler = new Handler(){
@@ -72,6 +82,9 @@ public class HistoryRecordActivity extends AppCompatActivity {
         Tab=(TabLayout)findViewById(R.id.history_tab);
         viewPager=(ViewPager)findViewById(R.id.history_vp);
         return_btn=(ImageButton)findViewById(R.id.return_btn);
+        mStatiscTxtView = findViewById(R.id.txt_view_statistical);
+        mSpinner = findViewById(R.id.center_spinner);
+
         return_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,9 +92,27 @@ public class HistoryRecordActivity extends AppCompatActivity {
             }
         });
 
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String[] items = getResources().getStringArray(R.array.spitem);
+                mSpinnerSelectedValue = items[i] + "统计";
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                mSpinnerSelectedValue = "跑步统计";
+            }
+        });
 
-
+        mStatiscTxtView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HistoryRecordActivity.this, StatisticalActivity.class);
+                intent.putExtra(StatisticalActivity.PARAM_0, mSpinnerSelectedValue);
+                startActivity(intent);
+            }
+        });
 
         initTab();
 
@@ -175,6 +206,11 @@ public class HistoryRecordActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public static void actionStart(Context context, String... param){
+        Intent intent = new Intent(context, HistoryRecordActivity.class);
+        context.startActivity(intent);
     }
 }
 

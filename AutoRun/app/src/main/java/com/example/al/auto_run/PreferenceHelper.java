@@ -32,13 +32,13 @@ public class PreferenceHelper {
     public static final String DataofWeek_Run="dataofweek_run";
     public static final String DataofWeek_Ride="dataofweek_ride";
 
-    /*public static final String Monday="2";
+    public static final String Monday="2";
     public static final String Tuesday="3";
     public static final String Wednesday="4";
     public static final String Thursday="5";
     public static final String Friday="6";
     public static final String Saturday="7";
-    public static final String Sunday="1";*/
+    public static final String Sunday="1";
 
     private static SharedPreferences getOneDaySteps(Context context){
         return context.getSharedPreferences(Steps,Context.MODE_PRIVATE);
@@ -87,7 +87,7 @@ public class PreferenceHelper {
         return context.getSharedPreferences(AllDistance,Context.MODE_PRIVATE);
     }
     public static void addDis_walk(Context context,float value){
-        float a=getDis_ride(context)+value;
+        float a=getDis_walk(context)+value;
         getAllDistanceDataPreference(context).edit().putFloat(Dis_walk,a).commit();
     }
     public static void addDis_run(Context context,float value){

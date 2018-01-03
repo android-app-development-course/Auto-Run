@@ -14,4 +14,8 @@
 
     <dimen name="miles_size_big">70sp</dimen>
     <dimen name="miles_size_small">15sp</dimen>
+
+    <dimen name="statiscal_text_size">23sp</dimen>
+    <dimen name="statiscal_margin">15dp</dimen>
+    <dimen name="statiscal_margin_big">20dp</dimen>
 </resources>

@@ -8,4 +8,14 @@
         <attr name="ringColor" format="color"/>
     </declare-styleable>
 
+    //图表属性
+    <attr name="xtextSize" format="dimension"/>
+    <attr name="xtextColor" format="color"/>
+    <attr name="gramBackground" format="color"/>
+
+    <declare-styleable name="HistogramCharView">
+        <attr name="xtextSize"/>
+        <attr name="xtextColor"/>
+        <attr name="gramBackground"/>
+    </declare-styleable>
 </resources>

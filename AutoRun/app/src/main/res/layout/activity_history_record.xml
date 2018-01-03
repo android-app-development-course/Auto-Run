@@ -29,16 +29,24 @@
                 android:src="@drawable/ic_keyboard_arrow_left_black_24dp" />
 
             <android.support.v7.widget.AppCompatSpinner
-                android:id="@+id/CenterSpinner"
+                android:id="@+id/center_spinner"
                 android:theme="@style/SpnStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:entries="@array/spitem"
                 android:spinnerMode="dialog"
-                >
+                />
 
-            </android.support.v7.widget.AppCompatSpinner>
+            <TextView
+                android:id="@+id/txt_view_statistical"
+                android:text="统计"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"/>
         </android.support.v7.widget.Toolbar>
         <LinearLayout
             android:layout_width="match_parent"

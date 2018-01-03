@@ -164,7 +164,8 @@ public class OriginActivty extends BaseActivity
             Intent intent=new Intent(OriginActivty.this,PersoninformationActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_history_record) {
-
+            Intent intent=new Intent(OriginActivty.this, HistoryRecordActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_id_binding) {
 
         } else if (id == R.id.nav_detect_back) {
