@@ -41,7 +41,7 @@ public class HistogramCharView extends View {
     private Paint mGramPaint;
 
     //0点至当前时间各个小时步数记录数据
-    private List<Integer> mStepNums = new ArrayList<>();
+    private List<Float> mStepNums = new ArrayList<>();
     //根据所给数据，计算所得的单位步数占总步数的百分比，用于计算柱形的高度
     private List<Float> mDegrees = new ArrayList<>();
     //X/时间轴
@@ -163,7 +163,7 @@ public class HistogramCharView extends View {
 //        mStepNums.add(160);
     }
 
-    public void setData(List<Integer> listNumber){
+    public void setData(List<Float> listNumber){
         mStepNums.clear();
         mStepNums.addAll(listNumber);
         //计算各步数占比
@@ -201,10 +201,10 @@ public class HistogramCharView extends View {
         mGramPaint.setColor(mGramColor);
     }
 
-    private float getSum(List<Integer> list){
+    private float getSum(List<Float> list){
         float cnt = 0;
-        for (Integer integer : list){
-            cnt += integer.intValue();
+        for (Float item : list){
+            cnt += item.intValue();
         }
         return cnt;
     }

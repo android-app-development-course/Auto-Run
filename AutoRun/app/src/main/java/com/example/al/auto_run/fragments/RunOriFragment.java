@@ -24,6 +24,8 @@ import com.example.al.auto_run.activity.HistoryRecordActivity;
 import com.example.al.auto_run.activity.RecordActivity;
 import com.example.al.auto_run.customanim.CircularAnim;
 
+import java.text.DecimalFormat;
+
 import at.markushi.ui.CircleButton;
 
 /**
@@ -42,7 +44,7 @@ public class RunOriFragment extends Fragment {
         tv_view_miles=view.findViewById(R.id.txt_view_miles);
         tv_view_miles.setText("跑步总公里");
         Tv_miles_count=view.findViewById(R.id.txt_view_miles_count);
-        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_run(getContext())));
+        Change();
         Tv_miles_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,6 +81,9 @@ public class RunOriFragment extends Fragment {
         return view;
     }
     public void Change(){
-        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_run(getContext())));
+        float a=PreferenceHelper.getDis_run(getContext());
+        DecimalFormat decimalFormat=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        String p=decimalFormat.format(a);
+        Tv_miles_count.setText(p);
     }
 }

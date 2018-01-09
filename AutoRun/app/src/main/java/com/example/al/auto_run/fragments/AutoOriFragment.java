@@ -38,7 +38,10 @@ public class AutoOriFragment extends Fragment {
         //Log.i("walk",mySharedPreferences_walk.getString("steps_walk","0"));
         tv_run.setText(PreferenceHelper.getSteps_run(getContext()));
         tv_walk.setText(PreferenceHelper.getSteps_walk(getContext()));
-        tv_ride.setText(PreferenceHelper.getSteps_ride(getContext()));
+        String dis=PreferenceHelper.getSteps_ride(getContext());
+        float a=Float.parseFloat(dis);
+        a=(float)(Math.round(a*100)/100);
+        tv_ride.setText(String.valueOf(a));
     }
 
     private void setOnClick(){

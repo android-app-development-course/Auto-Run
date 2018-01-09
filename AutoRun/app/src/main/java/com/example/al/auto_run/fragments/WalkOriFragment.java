@@ -19,6 +19,8 @@ import com.example.al.auto_run.activity.CountdownActivity;
 import com.example.al.auto_run.activity.HistoryRecordActivity;
 import com.example.al.auto_run.customanim.CircularAnim;
 
+import java.text.DecimalFormat;
+
 
 /**
  * Created by windy on 2017/11/11.
@@ -37,7 +39,7 @@ public class WalkOriFragment extends Fragment {
         tv_view_miles=view.findViewById(R.id.txt_view_miles);
         tv_view_miles.setText("健走总公里");
         Tv_miles_count=view.findViewById(R.id.txt_view_miles_count);
-        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_walk(getContext())));
+        Change();
         Tv_miles_count.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,6 +78,9 @@ public class WalkOriFragment extends Fragment {
     }
 
     public void Change(){
-        Tv_miles_count.setText(String.valueOf(PreferenceHelper.getDis_walk(getContext())));
+        float a=PreferenceHelper.getDis_walk(getContext());
+        DecimalFormat decimalFormat=new DecimalFormat("##0.00");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        String p=decimalFormat.format(a);
+        Tv_miles_count.setText(p);
     }
 }

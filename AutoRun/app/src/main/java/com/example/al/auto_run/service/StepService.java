@@ -83,7 +83,7 @@ public class StepService extends Service {
             }
             else if(state==3&&isRide){
                 double nowsteps=Double.parseDouble(PreferenceHelper.getSteps_ride(getApplicationContext()));
-                PreferenceHelper.setSteps_ride(getApplicationContext(),formatdf(RideDistant +nowsteps)+ "");
+                PreferenceHelper.setSteps_ride(getApplicationContext(),formatdf(RideDistant/1000 +nowsteps)+ "");
             }
             //Log.i("StepService",String.valueOf(state));
             mCallback.updateUi();
@@ -96,7 +96,7 @@ public class StepService extends Service {
         return this.mBinder;
     }
 
-    public void onCreate() {
+    public void onCreate(){
         super.onCreate();
         SDKInitializer.initialize(getApplicationContext());
         initLocation();

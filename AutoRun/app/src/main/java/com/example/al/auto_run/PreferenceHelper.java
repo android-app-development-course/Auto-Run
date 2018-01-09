@@ -99,15 +99,12 @@ public class PreferenceHelper {
         getAllDistanceDataPreference(context).edit().putFloat(Dis_ride,a).commit();
     }
     public static float getDis_walk(Context context){
-        Log.i("Dis_walk",String.valueOf(getAllDistanceDataPreference(context).getFloat(Dis_walk,0)));
         return getAllDistanceDataPreference(context).getFloat(Dis_walk,0);
     }
     public static float getDis_run(Context context){
-        Log.i("Dis_walk",String.valueOf(getAllDistanceDataPreference(context).getFloat(Dis_run,0)));
         return getAllDistanceDataPreference(context).getFloat(Dis_run,0);
     }
     public static float getDis_ride(Context context){
-        Log.i("Dis_walk",String.valueOf(getAllDistanceDataPreference(context).getFloat(Dis_ride,0)));
         return getAllDistanceDataPreference(context).getFloat(Dis_ride,0);
     }
 }

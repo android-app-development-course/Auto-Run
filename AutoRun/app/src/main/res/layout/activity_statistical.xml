@@ -60,12 +60,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="15dp"/>
+
         <TextView
             android:id="@+id/text_view_history_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="17/09/01 - 17/09/07"
+            android:text="18/1/1 - 18/1/7"
             android:textSize="16sp" />
 
             <ImageView
