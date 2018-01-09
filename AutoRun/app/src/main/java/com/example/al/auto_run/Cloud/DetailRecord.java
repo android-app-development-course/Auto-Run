@@ -3,7 +3,6 @@ package com.example.al.auto_run.Cloud;
 import java.util.List;
 
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobFile;
 
 /**
  * Created by yyj on 2017/12/31.

@@ -3,11 +3,11 @@ package com.example.al.auto_run.fragments;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +17,9 @@ import android.widget.Toast;
 
 import com.example.al.auto_run.Cloud.MyUser;
 import com.example.al.auto_run.Cloud.SimpleRecord;
-import com.example.al.auto_run.activity.HistoryDetailed;
-import com.example.al.auto_run.adapters.HistoryData;
-import com.example.al.auto_run.adapters.*;
 import com.example.al.auto_run.R;
+import com.example.al.auto_run.activity.HistoryDetailed;
+import com.example.al.auto_run.adapters.LvAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

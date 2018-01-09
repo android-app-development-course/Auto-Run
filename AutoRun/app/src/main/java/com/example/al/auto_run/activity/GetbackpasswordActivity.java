@@ -1,13 +1,11 @@
 package com.example.al.auto_run.activity;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.example.al.auto_run.R;
 
@@ -31,12 +29,6 @@ public class GetbackpasswordActivity extends AppCompatActivity {
         mGetbackPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(GetbackpasswordActivity.this, "找回密码申请已接收，请注意邮箱信息！", Toast.LENGTH_SHORT).show();
-            }
-        });
-        mToReturnLoginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
                 final String emails=email.getText().toString().trim();
                 BmobUser.resetPasswordByEmail(emails, new UpdateListener() {
 
@@ -50,6 +42,12 @@ public class GetbackpasswordActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+        mToReturnLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

@@ -1,14 +1,9 @@
 package com.example.al.auto_run.service;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Binder;
@@ -16,9 +11,6 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
@@ -26,15 +18,12 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.map.Polyline;
-import com.baidu.mapapi.map.PolylineOptions;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.example.al.auto_run.GpsCheck;
 import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.StepCount;
 import com.example.al.auto_run.StepDetector;
-import com.example.al.auto_run.activity.RecordActivity;
 import com.example.al.auto_run.custominterface.StepValuePassListener;
 import com.example.al.auto_run.custominterface.UpdateUiCallBack;
 

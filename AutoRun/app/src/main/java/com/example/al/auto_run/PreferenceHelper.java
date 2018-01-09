@@ -2,7 +2,6 @@ package com.example.al.auto_run;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 /**
  * Created by Al on 2017/12/30.

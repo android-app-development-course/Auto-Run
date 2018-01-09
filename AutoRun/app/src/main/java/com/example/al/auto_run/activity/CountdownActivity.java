@@ -4,12 +4,7 @@ package com.example.al.auto_run.activity;
  * Created by Al on 2017/11/19.
  */
 
-import android.annotation.TargetApi;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.animation.Animation;
@@ -20,7 +15,6 @@ import android.widget.Toast;
 
 import com.example.al.auto_run.BaseActivity;
 import com.example.al.auto_run.R;
-import com.example.al.auto_run.utils.ActivityCollector;
 import com.githang.statusbar.StatusBarCompat;
 
 public class CountdownActivity extends BaseActivity {

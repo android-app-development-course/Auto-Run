@@ -1,7 +1,6 @@
 package com.example.al.auto_run.utils;
 
 import android.app.Activity;
-import android.app.Application;
 
 import java.util.ArrayList;
 import java.util.List;

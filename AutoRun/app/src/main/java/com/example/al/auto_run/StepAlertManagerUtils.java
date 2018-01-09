@@ -9,7 +9,6 @@ import android.os.Build;
 import com.example.al.auto_run.BroadcastReceiver.TodayStepAlertReceive;
 
 import java.util.Calendar;
-import java.util.logging.Logger;
 
 import static android.content.Context.ALARM_SERVICE;
 

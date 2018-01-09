@@ -1,26 +1,13 @@
 package com.example.al.auto_run.Cloud;
 
-import android.annotation.SuppressLint;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.al.auto_run.R;
-import com.example.al.auto_run.activity.OriginActivty;
 import com.example.al.auto_run.adapters.HistoryData;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.exception.BmobException;
-import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
-import cn.bmob.v3.listener.UploadFileListener;
 
 import static cn.bmob.v3.Bmob.getApplicationContext;
 import static cn.bmob.v3.BmobRealTimeData.TAG;

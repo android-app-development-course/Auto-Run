@@ -1,14 +1,9 @@
 package com.example.al.auto_run.fragments;
 
-import android.app.ActivityOptions;
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,12 +16,9 @@ import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.activity.CountdownActivity;
 import com.example.al.auto_run.activity.HistoryRecordActivity;
-import com.example.al.auto_run.activity.RecordActivity;
 import com.example.al.auto_run.customanim.CircularAnim;
 
 import java.text.DecimalFormat;
-
-import at.markushi.ui.CircleButton;
 
 /**
  * Created by windy on 2017/11/11.

@@ -27,13 +27,9 @@ import android.widget.Toast;
 
 import com.example.al.auto_run.BaseActivity;
 import com.example.al.auto_run.CalendarCount;
-import com.example.al.auto_run.Cloud.MyUser;
-import com.example.al.auto_run.Cloud.SimpleRecord;
-import com.example.al.auto_run.Cloud.saveCloudData;
 import com.example.al.auto_run.PreferenceHelper;
 import com.example.al.auto_run.R;
 import com.example.al.auto_run.StepAlertManagerUtils;
-import com.example.al.auto_run.adapters.HistoryData;
 import com.example.al.auto_run.adapters.ViewPagerAdapter;
 import com.example.al.auto_run.custominterface.UpdateUiCallBack;
 import com.example.al.auto_run.fragments.AutoOriFragment;
@@ -46,8 +42,6 @@ import com.githang.statusbar.StatusBarCompat;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.bmob.v3.BmobUser;
 
 /**
  * Created by windy on 2017/11/10.
