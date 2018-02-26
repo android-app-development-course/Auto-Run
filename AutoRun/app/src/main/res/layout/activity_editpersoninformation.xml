@@ -14,8 +14,8 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/circle_bg"
         android:src="@drawable/ic_keyboard_arrow_left_black_24dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"/>
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" />
 
     <Button
         android:id="@+id/submit"
