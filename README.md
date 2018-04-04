@@ -5,7 +5,7 @@
 项目开发的源代码在“AutoRun”目录中
 
 
-APK安装程序在“AutoRun\app\release”目录中，有四个版本：
+APK安装程序在“安装包”目录中，有四个版本：
 
 1.app-armeabiv-v7a-release: 第7代及以上的 ARM 处理器。2011年15月以后的生产的大部分Android设备都使用它
 

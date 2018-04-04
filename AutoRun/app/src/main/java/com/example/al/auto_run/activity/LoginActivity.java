@@ -94,6 +94,7 @@ public class LoginActivity extends BaseActivity {
                                         Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(LoginActivity.this, OriginActivty.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "用户名或密码错误！",
                                         Toast.LENGTH_SHORT).show();
@@ -108,6 +109,7 @@ public class LoginActivity extends BaseActivity {
                             Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, OriginActivty.class);
                     startActivity(intent);
+                    finish();
                 }
             }
         });

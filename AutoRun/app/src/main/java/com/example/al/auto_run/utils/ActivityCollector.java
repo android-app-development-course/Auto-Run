@@ -4,17 +4,25 @@ import android.app.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by windy on 2017/11/19.
  */
 
 public class ActivityCollector {
-    private static List<Activity> mActivities =  new ArrayList<>();
+    private static Stack<Activity> mActivities =  new Stack<Activity>();
 
+    public static int getSize(){
+        return mActivities.size();
+    }
+    public static Activity currentActivity() {
+        Activity activity = mActivities.peek();
+        return activity;
+    }
     public static void addActivity(Activity activity){
         if (!mActivities.contains(activity))
-            mActivities.add(activity);
+            mActivities.push(activity);
     }
 
     public static void removeActivity(Activity activity){
