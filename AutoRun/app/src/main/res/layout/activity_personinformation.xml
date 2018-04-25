@@ -34,8 +34,7 @@
         android:layout_centerHorizontal="true"
         android:textColor="#FF000000"
         android:textSize="22dp"
-        android:text="个人信息"
-        android:id="@+id/textView5" />
+        android:text="个人信息" />
 
     <ImageView
         android:layout_width="90dp"
@@ -56,7 +55,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/name"
             android:layout_weight="0.4"
             android:gravity="center"
             android:textSize="18dp"
@@ -83,7 +81,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/sex"
             android:layout_weight="0.4"
             android:gravity="center"
             android:textSize="18dp"
@@ -110,7 +107,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/sign"
             android:layout_weight="0.4"
             android:gravity="center"
             android:textSize="18dp"
@@ -145,7 +141,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/height"
             android:layout_weight="0.4"
             android:gravity="center"
             android:textSize="18dp"
@@ -162,7 +157,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_below="@id/linearLayout4"
@@ -172,7 +166,6 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/weight"
             android:layout_weight="0.4"
             android:gravity="center"
             android:textSize="18dp"

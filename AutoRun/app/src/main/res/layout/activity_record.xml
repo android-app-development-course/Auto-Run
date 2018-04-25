@@ -142,7 +142,6 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_stop"
                     android:layout_marginTop="5dp"
                     android:text="暂停"
                     android:textColor="#FFFFFF"
@@ -168,7 +167,6 @@
                     android:adjustViewBounds="false"
                     android:background="@drawable/ic_play_circle_filled_black_24dp"/>
                 <TextView
-                    android:id="@+id/tv_comeon"
                     android:text="继续"
                     android:textColor="#FFFFFF"
                     android:layout_marginTop="5dp"
@@ -197,7 +195,6 @@
                     tc:strokeWidth="20dp"
                     />
                 <TextView
-                    android:id="@+id/tv_over"
                     android:text="长按结束"
                     android:textColor="#FFFFFF"
                     android:layout_marginTop="5dp"

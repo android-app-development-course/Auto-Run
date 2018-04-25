@@ -18,19 +18,19 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colortry1main"
             app:layout_scrollFlags=""
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <android.support.design.widget.TabLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tab_layout"
+                app:tabMode="scrollable"
+                app:tabBackground="@color/colortry1main"
+                app:tabIndicatorColor="@color/colortry1qd"
+                app:tabSelectedTextColor="@color/colortry1qd"
+                app:tabTextColor="@color/colortryds"
+                app:tabGravity="fill"/>
+        </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.TabLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tab_layout"
-            app:tabMode="scrollable"
-            app:tabBackground="@color/colortry1main"
-            app:tabIndicatorColor="@color/colortry1qd"
-            app:tabSelectedTextColor="@color/colortry1qd"
-            app:tabTextColor="@color/colortryds"
-            app:tabGravity="fill">
-        </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>
 
         <android.support.v4.view.ViewPager

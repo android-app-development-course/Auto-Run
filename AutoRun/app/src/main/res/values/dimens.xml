@@ -4,18 +4,14 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="content_origin_margin">60dp</dimen>
     <dimen name="origin_auto_margin_top">40dp</dimen>
     <dimen name="origin_auto_top_small">10dp</dimen>
-    <dimen name="img_btn_width">60dp</dimen>
-    <dimen name="img_btn_height">60dp</dimen>
 
     <dimen name="miles_size_big">70sp</dimen>
     <dimen name="miles_size_small">15sp</dimen>
 
     <dimen name="statiscal_text_size">23sp</dimen>
     <dimen name="statiscal_margin">15dp</dimen>
-    <dimen name="statiscal_margin_big">20dp</dimen>
 </resources>

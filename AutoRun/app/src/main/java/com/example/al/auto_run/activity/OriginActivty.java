@@ -206,7 +206,6 @@ public class OriginActivty extends BaseActivity
         mDrawerLayout = findViewById(R.id.drawer_layout);
         mToolBar = findViewById(R.id.toolbar);
         mNavigationView = findViewById(R.id.nav_view);
-
         mTabLayout = findViewById(R.id.tab_layout);
         mViewPage = findViewById(R.id.view_pager);
     }
